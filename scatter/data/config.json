@@ -1,0 +1,51 @@
+{
+    "essential" : {
+            "graphic_data_url": "data/dummydata.csv",
+            "pickxdata":"gdhi",
+            "pickydata":"employment",
+            "fills":["#1983ac","#3b7b5c","#4ab5dd"],
+            "sourceText":["My source information text here"],
+            "sourceURL":["http://www.ons.gov.uk/"],
+            "rectannotations":[],
+            "textAnnotations":[{
+              "x":0.5,
+              "y":-0.5,
+                "text":"2008-2009"
+              },{
+                "x":4,
+                "y":0.6,
+                "text":"1997-2007"
+                },{
+                "x":2,
+                "y":2,
+                "text":"2010-2016"
+                }],
+            "textAnnotationWrap":100,
+            "d3AnnotationWrap":200,
+            "xAxisLabel":"Average regional GDHI per head growth rate",
+            "yAxisLabel":"Average regional employment growth rate",
+            "AxisScale":"auto_min_max",
+      			"xAxisScale":[-8000,5000],
+      			"yAxisScale":[-8000,5000]
+
+	},
+    "optional" : {
+            "margin_sm": [50 ,20, 10, 50],
+            "margin_md": [50, 20, 10, 50],
+            "margin_lg": [50, 50, 10, 50],
+
+            "aspectRatio_sm" : [1.5,1],
+            "aspectRatio_md" : [1.5,1],
+            "aspectRatio_lg" : [1.5,1],
+
+            "mobileBreakpoint" : 610,
+
+            "x_num_ticks_sm_md_lg" : [4,5,5],
+            "y_num_ticks_sm_md_lg" : [4,5,5],
+
+            "annotateLineX1_Y1_X2_Y2":[[[0,1],[42,1]],[[-1,0],[5,0]]],
+            "lineColor_opcty" : [["#666", 0.5],["#666", 0.5]]
+
+
+    }
+}
