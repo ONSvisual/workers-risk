@@ -1,7 +1,7 @@
 ﻿id,uk_2010_soc_code,name,proximity,exposure,in_employment,group
-54,2139,Information technology and telecommunications professionals n.e.c.,-9,12,59880,grp1
+54,2139,Information technology and telecommunications professionals,-9,12,59880,grp1
 50,2134,IT project and programme managers,-9,16,75724,grp1
-123,3219,Health associate professionals n.e.c.,-9,32,42351,grp1
+123,3219,Health associate professionals,-9,32,42351,grp1
 118,3132,IT user support technicians,-9,33,118479,grp1
 49,2133,IT specialist managers,-9,48,189016,grp1
 129,3311,NCOs and other ranks,-9,49,49815,grp1
@@ -16,8 +16,8 @@
 81,2412,Barristers and judges,34,9,15810,grp1
 82,2413,Solicitors,34,14,109308,grp1
 251,5441,"Glass and ceramics makers, decorators and finishers",34,43,7433,grp1
-83,2419,Legal professionals n.e.c.,34,84,109308,grp1
-202,5119,Agricultural and fishing trades n.e.c.,34,88,29643,grp1
+83,2419,Legal professionals,34,84,109308,grp1
+202,5119,Agricultural and fishing trades,34,88,29643,grp1
 353,9234,"Launderers, dry cleaners and pressers",35,19,31880,grp1
 162,3543,Marketing associate professionals,36,36,210844,grp1
 107,2473,Advertising accounts managers and creative directors,36,88,34715,grp1
@@ -26,7 +26,7 @@
 10,1135,Human resource managers and directors,39.66666667,31,199581,grp1
 55,2141,Conservation professionals,40,43,19758,grp1
 59,2212,Psychologists,40,49,38719,grp1
-70,2229,Therapy professionals n.e.c.,40,73,14617,grp1
+70,2229,Therapy professionals,40,73,14617,grp1
 56,2142,Environment professionals,40,88,49598,grp1
 51,2135,"IT business analysts, architects and systems designers",40.5,45,139873,grp1
 151,3531,"Estimators, valuers and assessors",41,9,61294,grp1
@@ -47,7 +47,7 @@
 101,2452,Archivists and curators,44,1,13577,grp1
 6,1131,Financial managers and directors,44,14,322944,grp1
 179,4124,Finance officers,44,37,42749,grp1
-307,8119,Process operatives n.e.c.,44,40,*,grp1
+307,8119,Process operatives,44,40,*,grp1
 158,3538,Financial accounts managers,44,41,176939,grp1
 177,4122,"Book-keepers, payroll managers and wages clerks",44,44,433867,grp1
 194,4214,Company secretaries,44,95,37779,grp1
@@ -56,15 +56,15 @@
 42,2121,Civil engineers,45,17,78921,grp1
 19,1181,Health services and public health managers and directors,45,59,63410,grp1
 176,4121,Credit controllers,45,92,35881,grp1
-41,2119,Natural and social science professionals n.e.c.,45.125,27,29861,grp1
+41,2119,Natural and social science professionals,45.125,27,29861,grp1
 38,2112,Biological scientists and biochemists,45.125,89,85373,grp1
 168,3562,Human resources and industrial relations officers,45.66666667,9,132913,grp1
 170,3564,Careers advisers and vocational guidance specialists,45.66666667,21,20541,grp1
 106,2472,Public relations professionals,46,20,52516,grp1
-159,3539,Business and related associate professionals n.e.c.,46,87,176939,grp1
+159,3539,Business and related associate professionals,46,87,176939,grp1
 157,3537,Financial and accounting technicians,46.5,48,15595,grp1
 92,2433,Quantity surveyors,46.66666667,3,44160,grp1
-48,2129,Engineering professionals n.e.c.,46.66666667,43,41790,grp1
+48,2129,Engineering professionals,46.66666667,43,41790,grp1
 102,2461,Quality control and planning engineers,46.66666667,44,33090,grp1
 46,2126,Design and development engineers,46.66666667,79,75279,grp1
 298,7220,Customer service managers and supervisors,47,5,184932,grp1
@@ -77,14 +77,14 @@
 7,1132,Marketing and sales directors,47.5,5,227135,grp1
 45,2124,Electronics engineers,47.5,39,33308,grp1
 52,2136,Programmers and software development professionals,47.5,43,338276,grp1
-297,7219,Customer service occupations n.e.c.,47.5,50,10296,grp1
+297,7219,Customer service occupations,47.5,50,10296,grp1
 136,3412,"Authors, writers and translators",48,0,61781,grp1
 279,6232,Caretakers,48,7,69617,grp1
 350,9231,Window cleaners,48,22,30142,grp1
 44,2123,Electrical engineers,48,74,48932,grp1
 364,9271,Hospital porters,48.33333333,39,20671,grp1
 352,9233,Cleaners and domestics,48.33333333,57,575341,grp1
-356,9239,Elementary cleaning occupations n.e.c.,48.33333333,92,24122,grp1
+356,9239,Elementary cleaning occupations,48.33333333,92,24122,grp1
 354,9235,Refuse and salvage occupations,48.5,82,38432,grp1
 160,3541,Buyers and procurement officers,48.66666667,94,54510,grp1
 32,1252,Garage managers and proprietors,49,7,27496,grp1
@@ -94,28 +94,28 @@
 35,1255,Waste disposal and environmental services managers,49,50,12104,grp1
 1,1115,Chief executives and senior officials,49,53,110090,grp1
 5,1123,Production managers and directors in mining and energy,49,58,16553,grp1
-36,1259,Managers and proprietors in other services n.e.c.,49,58,12104,grp1
+36,1259,Managers and proprietors in other services,49,58,12104,grp1
 33,1253,Hairdressing and beauty salon managers and proprietors,49,64,29533,grp1
 84,2421,Chartered and certified accountants,49,64,182194,grp1
 155,3535,Taxation experts,49,67,34382,grp1
 18,1173,"Senior officers in fire, ambulance, prison and related services",49,78,7349,grp1
-12,1139,Functional managers and directors n.e.c.,49,92,100794,grp1
+12,1139,Functional managers and directors,49,92,100794,grp1
 26,1224,Publicans and managers of licensed premises,49,94,41213,grp1
 261,6132,Pest control officers,49.33333333,83,5628,grp1
 85,2423,Management consultants and business analysts,49.5,40,174538,grp1
 302,8114,Chemical and related process operatives,49.5,45,34870,grp1
 86,2424,Business and financial project management professionals,49.5,50,265645,grp1
-188,4159,Other administrative occupations n.e.c.,49.5,69,76149,grp1
+188,4159,Other administrative occupations,49.5,69,76149,grp1
 103,2462,Quality assurance and regulatory professionals,49.5,73,89000,grp1
 95,2436,Construction project managers and related professionals,50,9,86160,grp1
-241,5419,"Textiles, garments and related trades n.e.c.",50,16,13421,grp1
+241,5419,"Textiles, garments and related trades",50,16,13421,grp1
 4,1122,Production managers and directors in construction,50,17,207612,grp1
-232,5319,Construction and building trades n.e.c.,50,39,36156,grp1
+232,5319,Construction and building trades,50,39,36156,grp1
 30,1242,"Residential, day and domiciliary  care managers and proprietors",50,48,25098,grp1
 195,4215,Personal assistants and other secretaries,50,48,184956,grp1
 193,4213,School secretaries,50,63,73143,grp1
 333,8222,Fork-lift truck drivers,50,100,90067,grp1
-335,8229,Mobile machine drivers and operatives n.e.c.,50.4,4,10063,grp1
+335,8229,Mobile machine drivers and operatives,50.4,4,10063,grp1
 242,5421,Pre-press technicians,50.5,8,*,grp1
 342,9112,Forestry workers,50.5,76,7500,grp1
 73,2311,Higher education teaching professionals,50.66666667,90,161935,grp1
@@ -129,11 +129,11 @@
 98,2444,Clergy,51.5,5,55647,grp1
 37,2111,Chemical scientists,51.5,26,32050,grp1
 153,3533,Insurance underwriters,52,14,33506,grp1
-89,2429,"Business, research and administrative professionals n.e.c.",52,20,44678,grp1
+89,2429,"Business, research and administrative professionals",52,20,44678,grp1
 183,4133,Stock control clerks and assistants,52,31,104224,grp1
 88,2426,Business and related research professionals,52,53,44678,grp1
 196,4216,Receptionists,52,58,255123,grp1
-254,5449,Other skilled trades n.e.c.,52,96,13853,grp1
+254,5449,Other skilled trades,52,96,13853,grp1
 186,4138,Human resources administrative occupations,53,27,32038,grp1
 94,2435,Chartered architectural technologists,53,46,*,grp1
 90,2431,Architects,53,67,53650,grp1
@@ -143,13 +143,13 @@
 209,5221,Metal machining setters and setter-operators,53.63636364,51,46298,grp1
 312,8125,Metal working machine operatives,53.63636364,78,69778,grp1
 112,3115,Quality assurance technicians,53.8,59,38120,grp1
-114,3119,"Science, engineering and production technicians n.e.c.",53.8,62,22799,grp1
+114,3119,"Science, engineering and production technicians",53.8,62,22799,grp1
 235,5323,Painters and decorators,54,5,103231,grp1
 91,2432,Town planning officers,54,11,22535,grp1
 252,5442,Furniture makers and other craft woodworkers,54,30,31741,grp1
 140,3416,"Arts officers, producers and directors",54,34,95432,grp1
 327,8211,Large goods vehicle drivers,54,78,322700,grp1
-315,8129,Plant and machine operatives n.e.c.,54,95,16449,grp1
+315,8129,Plant and machine operatives,54,95,16449,grp1
 156,3536,Importers and exporters,54,97,7749,grp1
 305,8117,Metal making and treating process operatives,54.2,82,9110,grp1
 105,2471,"Journalists, newspaper and periodical editors",54.5,45,89595,grp1
@@ -188,7 +188,7 @@
 339,8234,Rail transport operatives,56.66666667,93,9339,grp1
 332,8221,Crane drivers,56.8,100,16145,grp1
 113,3116,"Planning, process and production technicians",57,38,22799,grp1
-347,9139,Elementary process plant occupations n.e.c.,57,44,128392,grp1
+347,9139,Elementary process plant occupations,57,44,128392,grp1
 345,9132,Industrial cleaning process occupations,57,68,26820,grp1
 197,4217,Typists and related keyboard occupations,57,90,38862,grp1
 182,4132,Pensions and insurance clerks and assistants,57.33333333,19,74697,grp1
@@ -198,18 +198,18 @@
 108,3111,Laboratory technicians,58,89,74677,grp1
 184,4134,Transport and distribution clerks and assistants,58,95,67715,grp1
 304,8116,Plastics process operatives,58.33333333,85,14194,grp1
-224,5249,Electrical and electronic trades n.e.c.,58.5,6,35417,grp1
+224,5249,Electrical and electronic trades,58.5,6,35417,grp1
 222,5244,"TV, video and audio engineers",58.5,28,9387,grp1
 169,3563,Vocational and industrial trainers and instructors,59,37,152927,grp1
 233,5321,Plasterers,59,79,50991,grp1
 144,3441,Sports players,59,81,17476,grp1
 310,8123,Quarry workers and related operatives,59.64285714,31,6500,grp1
 272,6212,Travel agents,59.66666667,92,36612,grp1
-134,3319,Protective service associate professionals n.e.c.,60.16666667,13,19252,grp1
+134,3319,Protective service associate professionals,60.16666667,13,19252,grp1
 215,5232,Vehicle body builders and repairers ,60.22222222,54,29578,grp1
 96,2442,Social workers,60.375,46,95788,grp1
 127,3235,Counsellors,60.375,54,13839,grp1
-99,2449,Welfare professionals n.e.c.,60.375,58,55647,grp1
+99,2449,Welfare professionals,60.375,58,55647,grp1
 97,2443,Probation officers,60.375,89,10771,grp1
 115,3121,Architectural and town planning technicians,60.5,1,29443,grp1
 111,3114,Building and civil engineering technicians,60.5,100,14868,grp1
@@ -217,7 +217,7 @@
 223,5245,IT engineers,61.14285714,81,35417,grp1
 210,5222,"Tool makers, tool fitters and markers-out",61.33333333,23,11846,grp1
 217,5235,Aircraft maintenance and related trades,61.5,32,18841,grp1
-349,9219,Elementary administration occupations n.e.c.,61.5,78,161485,grp1
+349,9219,Elementary administration occupations,61.5,78,161485,grp1
 311,8124,Energy plant operatives,61.875,65,6361,grp1
 321,8137,Sewing machinists,62,30,33219,grp1
 109,3112,Electrical and electronics technicians,62,47,30934,grp1
@@ -226,13 +226,13 @@
 172,3567,Health and safety officers,63,69,56297,grp1
 234,5322,Floorers and wall tilers,63.75,33,32077,grp1
 301,8113,Textile process operatives,64,40,13211,grp1
-80,2319,Teaching and other educational professionals n.e.c.,64,60,23445,grp1
+80,2319,Teaching and other educational professionals,64,60,23445,grp1
 341,9111,Farm workers,64,64,64519,grp1
 348,9211,"Postal workers, mail sorters, messengers and couriers",64,75,161485,grp1
 205,5213,Sheet metal workers,64.33333333,93,8119,grp1
 104,2463,Environmental health professionals,64.5,34,4649,grp1
 317,8132,Assemblers (vehicles and metal goods),64.5,91,51772,grp1
-369,9279,Other elementary services occupations n.e.c.,64.75,12,40534,grp1
+369,9279,Other elementary services occupations,64.75,12,40534,grp1
 319,8134,"Weighers, graders and sorters",65,1,16395,grp1
 203,5211,Smiths and forge workers,65,8,5523,grp1
 225,5250,"Skilled metal, electrical and electronic trades supervisors",65,11,34003,grp1
@@ -241,23 +241,23 @@
 295,7214,Communication operators,65.5,75,32716,grp1
 294,7213,Telephonists,65.5,78,13030,grp1
 292,7130,Sales supervisors,66,38,200517,grp1
-322,8139,Assemblers and routine operatives n.e.c.,66,66,33219,grp1
+322,8139,Assemblers and routine operatives,66,66,33219,grp1
 149,3513,Ship and hovercraft officers,66,91,17507,grp1
 363,9260,Elementary storage occupations,66.25,35,488070,grp1
-340,8239,Other drivers and transport operatives n.e.c.,66.25,62,9339,grp1
+340,8239,Other drivers and transport operatives,66.25,62,9339,grp1
 338,8233,Air transport operatives,66.25,68,14438,grp1
 249,5435,Cooks,66.6,12,64700,grp1
 290,7125,Merchandisers and window dressers,67,26,29149,grp1
 286,7121,Collector salespersons and credit agents,67,30,11456,grp1
 289,7124,Market and street traders and assistants,67,53,19432,grp1
 288,7123,Roundspersons and van salespersons,67,78,29130,grp1
-362,9259,Elementary sales occupations n.e.c.,67,79,109680,grp1
-291,7129,Sales related occupations n.e.c.,67,84,29149,grp1
+362,9259,Elementary sales occupations,67,79,109680,grp1
+291,7129,Sales related occupations,67,84,29149,grp1
 247,5433,Fishmongers and poultry dressers,67.5,4,6702,grp1
 245,5431,Butchers,67.5,12,40592,grp1
 185,4135,Library clerks and assistants,67.5,76,27869,grp1
 344,9120,Elementary construction occupations,67.57142857,6,179000,grp1
-360,9249,Elementary security occupations n.e.c.,68,2,90525,grp1
+360,9249,Elementary security occupations,68,2,90525,grp1
 368,9275,Leisure and theme park attendants,68,6,40534,grp1
 253,5443,Florists,68,11,13853,grp1
 281,7111,Sales and retail assistants,68,12,1079488,grp1
@@ -273,7 +273,7 @@
 218,5236,Boat and ship builders and repairers,68.44444444,46,13709,grp1
 219,5237,Rail and rolling stock builders and repairers,68.44444444,87,9046,grp1
 211,5223,Metal working production and maintenance fitters,68.44444444,93,214364,grp1
-326,8149,Construction operatives n.e.c.,68.5,52,11623,grp1
+326,8149,Construction operatives,68.5,52,11623,grp1
 204,5212,"Moulders, core makers and die casters",68.5,78,*,grp1
 231,5316,"Glaziers, window fabricators and fitters",69,31,36156,grp1
 361,9251,Shelf fillers,69,31,109680,grp1
@@ -281,7 +281,7 @@
 75,2314,Secondary education teaching professionals,70,27,382152,grp1
 346,9134,"Packers, bottlers, canners and fillers",70,81,128392,grp1
 323,8141,"Scaffolders, stagers and riggers",70.5,14,35195,grp1
-275,6219,Leisure and travel service occupations n.e.c.,70.66666667,66,22859,grp1
+275,6219,Leisure and travel service occupations,70.66666667,66,22859,grp1
 236,5330,Construction and building trades supervisors,71,96,47196,grp1
 365,9272,Kitchen and catering assistants,71.33333333,38,507275,grp1
 271,6211,Sports and leisure assistants,71.48333333,49,72122,grp1
@@ -301,10 +301,10 @@
 76,2315,Primary and nursery education teaching professionals,74.5,79,424876,grp3
 366,9273,Waiters and waitresses,75,11,261349,grp3
 284,7114,Pharmacy and other dispensing assistants,75.5,52,80347,grp3
-262,6139,Animal care services occupations n.e.c.,75.75,26,5628,grp3
+262,6139,Animal care services occupations,75.75,26,5628,grp3
 328,8212,Van drivers,75.8,12,275638,grp3
 330,8214,Taxi and cab drivers and chauffeurs,75.8,50,207697,grp1
-343,9119,Fishing and other elementary agriculture occupations n.e.c.,76,4,7500,grp1
+343,9119,Fishing and other elementary agriculture occupations,76,4,7500,grp1
 138,3414,Dancers and choreographers,76,10,20897,grp1
 27,1225,Leisure and sports managers,76,21,67218,grp1
 132,3314,Prison service officers (below principal officer),76,29,41436,grp1
@@ -321,11 +321,11 @@
 25,1223,Restaurant and catering establishment managers and proprietors,78,61,126695,grp1
 130,3312,Police officers (sergeant and below),78,64,142575,grp1
 250,5436,Catering and bar managers,78,81,79530,grp1
-180,4129,Financial administrative occupations n.e.c.,79,47,42749,grp1
+180,4129,Financial administrative occupations,79,47,42749,grp1
 124,3231,Youth and community workers,79,65,74526,grp1
 126,3234,Housing officers,79,75,59551,grp1
 125,3233,Child and early years officers,79,76,40434,grp1
-128,3239,Welfare and housing associate professionals n.e.c.,79,76,13839,grp1
+128,3239,Welfare and housing associate professionals,79,76,13839,grp1
 367,9274,Bar staff,79,85,208254,grp1
 178,4123,Bank and post office clerks,79,92,105670,grp1
 274,6215,Rail travel assistants,79.5,25,22859,grp1
@@ -334,7 +334,7 @@
 227,5312,Bricklayers and masons,81.5,43,97068,grp1
 121,3217,Pharmaceutical technicians,83,7,25441,grp1
 120,3216,Dispensing opticians,83,10,10933,grp1
-66,2219,Health professionals n.e.c.,83.4,36,14472,grp1
+66,2219,Health professionals,83.4,36,14472,grp1
 68,2222,Occupational therapists,83.4,57,48385,grp1
 65,2218,Podiatrists,83.4,80,14472,grp1
 257,6123,Playworkers,84.5,45,41727,grp1
