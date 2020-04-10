@@ -1,8 +1,8 @@
 {
     "essential" : {
-            "graphic_data_url": "data/dummydata.csv",
-            "pickxdata":"gdhi",
-            "pickydata":"employment",
+            "graphic_data_url": "data/occupations.csv",
+            "pickxdata":"proximity",
+            "pickydata":"exposure",
             "fills":["#1983ac","#3b7b5c","#4ab5dd"],
             "sourceText":["My source information text here"],
             "sourceURL":["http://www.ons.gov.uk/"],
@@ -25,8 +25,8 @@
             "xAxisLabel":"Average regional GDHI per head growth rate",
             "yAxisLabel":"Average regional employment growth rate",
             "AxisScale":"auto_min_max",
-      			"xAxisScale":[-8000,5000],
-      			"yAxisScale":[-8000,5000]
+      			"xAxisScale":[0,100],
+      			"yAxisScale":[0,100]
 
 	},
     "optional" : {
