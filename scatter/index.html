@@ -11,12 +11,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no" />
   <meta http-equiv="content-type" content="text/html; charset=utf-8" />
   <link rel="stylesheet" href="../lib/globalStyle.css" />
+  <link href='../lib/global.css' rel='stylesheet'/>
+
 
   <style>
         body {
           font-family: "Open Sans", sans-serif;
           font-size: 14px;
-          max-width: 700px;
+          max-width: 950px;
           cursor: pointer !important;
 
         }
@@ -68,6 +70,9 @@
     </style>
 </head>
 <body>
+<div class="select">
+  <select id="varselect"></select>
+</div>
 <div id="graphic"><img src="fallback.png" alt="[Chart]" /></div>
 
 
@@ -120,6 +125,9 @@ function drawGraphic(){
   // clear out existing graphics
 		graphic.selectAll("*").remove();
 		footer.selectAll("*").remove();
+
+  //draw select menu
+  drawSelect();
 
   // parse data into columns
   dots = {};
@@ -313,7 +321,7 @@ function drawGraphic(){
 
          main.selectAll('.circles').data(graphic_data).enter().append('circle')
             .attr( "class" , function(d,i){ return "circles " + d.group + " " + d["name"].replace(/\s/g, '') + " index" + i  })
-            .attr( "id" , function (d,i){ return "circle" +  i; })
+            .attr( "id" , function (d,i){ return "c" + d.uk_2010_soc_code; })
             .attr( "cx" , function(d) { return x(d[dvc.essential.pickxdata]); })
     				.attr( "cy" , function(d) { return y(d[dvc.essential.pickydata]); })
             .attr('r', function(d) { return r(d.in_employment); })
@@ -332,26 +340,26 @@ function drawGraphic(){
               d3.selectAll(".grp" + (j+1)).attr('fill', dvc.essential.fills[j])
           }
           // draw convex hulls
-          for(j=0; j<dvc.essential.fills.length; j++){
-
-
-            vertices[j] = [];
-
-            filtered =graphic_data.filter(function(d){return d.group == 'grp' + (j+1);})
-
-            for(i=0; i<filtered.length; i++) {
-              vertices[j].push([x(filtered[i][dvc.essential.pickxdata]),y(filtered[i][dvc.essential.pickydata])])
-            }
-
-            hullVertices[j] = d3.polygonHull(vertices[j])
-
-            hulls.append("path")
-              .attr("class","hull")
-              .attr("fill",dvc.essential.fills[j])
-              .attr("stroke",dvc.essential.fills[j])
-              .datum(hullVertices[j])
-              .attr("d", function(d) { return "M" + d.join("L") + "Z"; });
-          }
+          // for(j=0; j<dvc.essential.fills.length; j++){
+          //
+          //
+          //   vertices[j] = [];
+          //
+          //   filtered =graphic_data.filter(function(d){return d.group == 'grp' + (j+1);})
+          //
+          //   for(i=0; i<filtered.length; i++) {
+          //     vertices[j].push([x(filtered[i][dvc.essential.pickxdata]),y(filtered[i][dvc.essential.pickydata])])
+          //   }
+          //
+          //   hullVertices[j] = d3.polygonHull(vertices[j])
+          //
+          //   hulls.append("path")
+          //     .attr("class","hull")
+          //     .attr("fill",dvc.essential.fills[j])
+          //     .attr("stroke",dvc.essential.fills[j])
+          //     .datum(hullVertices[j])
+          //     .attr("d", function(d) { return "M" + d.join("L") + "Z"; });
+          // }
 
 
 
@@ -398,6 +406,8 @@ function drawGraphic(){
 
       // this function will call d3.annotation when a tooltip has to be drawn
         function tip (d) {
+
+          console.log(d)
           annotationtip = d3.annotation()
           .type(d3.annotationLabel)
           .notePadding(15)
@@ -463,7 +473,9 @@ function drawGraphic(){
           .attr('height', height)
           .on('mouseover', function() { focus.style('display', null); })
           .on('mouseout', function() { focus.style('display', 'none'); tipg.selectAll("g").remove(); d3.selectAll(".circles").classed("focusCircle",false); })
-          .on('mousemove', function() {
+          .on('mousemove', hover)
+
+          function hover() {
 
               var [mx, my] = d3.mouse(this);
 
@@ -498,7 +510,7 @@ function drawGraphic(){
                   .attr('x2', xpos).attr('y2', ypos);
 
 
-          })
+          }
 
 }//end if wider than mobileBreakpoint then do stuff
 
@@ -528,6 +540,89 @@ function drawGraphic(){
           }
         });
       }
+
+      function drawSelect() {
+
+        count=0;
+
+        hierarchy = d3.map(graphic_data, function(d){return d.grouphier;}).keys();
+
+        labels = graphic_data.map(function(d) { return d.name; });
+
+        hier = graphic_data.map(function(d) { return d.grouphier; });
+
+        codes = graphic_data.map(function(d) { return "c" + d.uk_2010_soc_code; });
+
+        mergedvars = d3.zip(hier,labels,codes)
+
+        console.log(hierarchy)
+
+        hierarchy.forEach(function(k,j) {
+
+
+          optgroup = d3.select("#varselect")
+            //.attr("name","select")
+            .on("change",selectCircle)
+            .append("optgroup")
+            .attr("label",k)
+
+          optgroup.selectAll('option')
+              .data(mergedvars.filter(function(d,i){return d[0] == hierarchy[j]}))
+              .enter()
+              .append("option")
+              .attr("value", function(d,i){return d[2]})
+              .text(function(d,i) {
+                var value = parseFloat(d[1]).toFixed(1);
+                return d[1];
+              })
+
+
+
+          count = count + mergedvars.filter(function(d,i){return d[0] == hierarchy[j]}).length;
+
+      });
+
+      function selectCircle() {
+
+        //
+
+        selocc = d3.select("#varselect").node().value;
+
+        //layername = d3.select(this).node().value;
+        d3.select(".overlay1").style("pointer-events","none");
+
+        d3.selectAll(".circles").classed("focusCircle",false);
+        d3.selectAll("#" + selocc).classed("focusCircle",true);
+
+        xpos = d3.selectAll("#" + selocc).attr("cx");
+        ypos = d3.selectAll("#" + selocc).attr("cy");
+
+        classString = d3.select("#" + selocc).attr("class");
+
+        splitString = classString.split(" ");
+
+        console.log(splitString)
+
+        indexString = splitString[3].split("index");
+
+        myObj = {}
+
+        myObj[0] = xpos;
+        myObj[1] = ypos;
+
+        xVal = x.invert(xpos);
+        yVal =y.invert(ypos);
+        myObj['data'] = [xVal,yVal];
+        myObj['index'] = indexString[1]
+
+        console.log(myObj)
+        tip(myObj)
+
+      }
+
+
+      }
+
 
 
 }//end drawGraphic

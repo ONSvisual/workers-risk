@@ -22,8 +22,8 @@
                 }],
             "textAnnotationWrap":100,
             "d3AnnotationWrap":200,
-            "xAxisLabel":"Average regional GDHI per head growth rate",
-            "yAxisLabel":"Average regional employment growth rate",
+            "xAxisLabel":"Physical proximity to others",
+            "yAxisLabel":"Exposure to diseases",
             "AxisScale":"auto_min_max",
       			"xAxisScale":[0,100],
       			"yAxisScale":[0,100]
