@@ -458,7 +458,11 @@ function drawGraphic(){
             .attr('height', 16)
             .attr("id","annotation-close")
             .attr("xlink:href", "../lib/closeblue.svg")
-            .on("click",function() {tipg.selectAll("g").remove(); d3.selectAll(".circles").classed("focusCircle",false); })
+            .on("click",function() {
+                tipg.selectAll("g").remove();
+                d3.selectAll(".circles").classed("focusCircle",false);
+                d3.select(".overlay1").style("pointer-events","all");
+            })
 
 
           d3.select(".connector").attr("stroke","#236092")
