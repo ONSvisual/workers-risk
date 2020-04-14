@@ -3,7 +3,7 @@
             "graphic_data_url": "data/occupations.csv",
             "pickxdata":"proximity",
             "pickydata":"exposure",
-            "fills":["#1983ac","#3b7b5c","#4ab5dd"],
+            "fills":["#ccc","#ccc","#ccc","#ccc","#ccc","#ccc","#ccc","#ccc","#ccc"],
             "sourceText":["My source information text here"],
             "sourceURL":["http://www.ons.gov.uk/"],
             "rectannotations":[],

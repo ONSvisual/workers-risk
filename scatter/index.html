@@ -49,6 +49,8 @@
 
         .focusCircle {
             fill: #FFA500;
+            stroke: #212121;
+            stroke-width: 3px;
         }
 
         .focusUK {
@@ -336,7 +338,10 @@ function drawGraphic(){
             hullVertices = []
 
           for(j=0; j<dvc.essential.fills.length; j++){
-              d3.selectAll(".grp" + (j+1)).attr('fill', dvc.essential.fills[j])
+              d3.selectAll(".grp" + (j+1))
+                .attr('fill', dvc.essential.fills[j])
+                .attr('stroke',"#b4b4b4")
+                .attr("stroke-width","1px")
           }
           // draw convex hulls
           // for(j=0; j<dvc.essential.fills.length; j++){
@@ -453,6 +458,7 @@ function drawGraphic(){
             .attr('height', 16)
             .attr("id","annotation-close")
             .attr("xlink:href", "../lib/closeblue.svg")
+            .on("click",function() {tipg.selectAll("g").remove(); d3.selectAll(".circles").classed("focusCircle",false); })
 
 
           d3.select(".connector").attr("stroke","#236092")
@@ -490,8 +496,8 @@ function drawGraphic(){
           .attr('transform', 'translate(' + margin.left + ', ' + margin.top + ')')
           .attr('width', chart_width)
           .attr('height', height)
-          .on('mouseover', function() { focus.style('display', null); })
-          .on('mouseout', function() { focus.style('display', 'none'); tipg.selectAll("g").remove(); d3.selectAll(".circles").classed("focusCircle",false); })
+          //.on('mouseover', function() { focus.style('display', null); })
+          .on('mouseout', function() {tipg.selectAll("g").remove(); d3.selectAll(".circles").classed("focusCircle",false); })
           .on('mousemove', hover)
 
           function hover() {
@@ -509,7 +515,7 @@ function drawGraphic(){
 
               splitString = classString.split(" ");
               d3.selectAll(".circles").classed("focusCircle",false);
-              d3.selectAll("." + splitString[2]).classed("focusCircle",true);
+              d3.selectAll("." + splitString[2]).classed("focusCircle",true).raise();
               console.log(splitString[2])
 
 
@@ -611,7 +617,7 @@ function drawGraphic(){
         d3.select(".overlay1").style("pointer-events","none");
 
         d3.selectAll(".circles").classed("focusCircle",false);
-        d3.selectAll("#" + selocc).classed("focusCircle",true);
+        d3.selectAll("#" + selocc).classed("focusCircle",true).raise();
 
         xpos = d3.selectAll("#" + selocc).attr("cx");
         ypos = d3.selectAll("#" + selocc).attr("cy");
