@@ -390,12 +390,8 @@ select {
   -webkit-appearance: none; }
 
 /**/
-.select {
-  position: relative;
-  height: 45px;
-  background: white;
-  border: none;
-}
+
+
   .select:after {
     content: '';
     position: absolute;

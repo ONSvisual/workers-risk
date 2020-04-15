@@ -16,8 +16,6 @@
 
   <style>
 
-/**Zoe changes*/
-
         body {
           font-family: "Open Sans", sans-serif;
           font-size: 14px;
@@ -64,13 +62,35 @@
           opacity:0.2;
           stroke-linejoin: round;
           stroke-width:20px;
+        }
 
 
         .annotation-note-bg {
-          fill: fuchsia !important;
-          fill-opacity: 0.5 !important;
+          /* fill: fuchsia !important;
+          fill-opacity: 0.5 !important; */
         }
 
+        @media (max-width: 500px) {
+          .select {
+            position: relative;
+            background: white;
+            height: 45px;
+            border: none;
+          }
+        }
+
+        @media (min-width: 501px) {
+          .select {
+            position: absolute;
+            background: white;
+            top: 65px;
+            width: 280px;
+            height: 45px;
+            left: 64px;
+            border: none;
+          }
+
+        }
 
     </style>
 </head>
@@ -289,9 +309,10 @@ function drawGraphic(){
          .attr('class', 'y-axis grid axis')
          .call(yAxis.tickSize(-chart_width, 0, 0))
          .append('text')
-             .attr('y', 10)
-             .attr('dy', '-2em')
-             .attr('dx','-3em')
+             .attr('y', -15)
+             .attr("x", -20)
+             // .attr('dy', '-2em')
+             // .attr('dx','-3em')
              .attr('text-anchor', 'start')
              .attr('fill', 'rgb(54, 54, 54)')
              .attr('font-size', '1.2em')
@@ -417,7 +438,7 @@ function drawGraphic(){
           console.log(d)
           annotationtip = d3.annotation()
           .type(d3.annotationLabel)
-          .notePadding(30)
+          .notePadding(notePadding)
           .annotations([d].map( d =>  {
             return {
               data: {x:d.data[0],y:d.data[1]},
@@ -428,7 +449,7 @@ function drawGraphic(){
               note: {
                  align: "middle",
                  title: graphic_data[d.index].name || "??",
-                 bgPadding: {top:35, left:15, bottom:15, right:15},
+                 bgPadding: borders,
                  label: "Exposure to disease"+": "+d3.format('.1f')(d.data[1])+" "+ ",Physical proximity" +": "+d3.format('.1f')(d.data[0]),
                  wrapSplitter: /,/,
                  wrap:dvc.essential.d3AnnotationWrap
@@ -449,23 +470,28 @@ function drawGraphic(){
           d3.select(".annotation-note-label").attr("fill","#236092");
           d3.select(".annotation-note-title").attr("fill","#236092").style("font-weight","bold").style("font-family","Open Sans");
 
-          d3.select("#annotation-close").remove();
+          if(selectchange == true) {
 
-          xclose = d3.select("rect.annotation-note-bg").attr("width");
+            d3.select("#annotation-close").remove();
 
-          d3.select(".annotation-note-content")
-            .append("svg:image")
-            .attr('x', xclose - 40)
-            .attr('y', -27)
-            .attr('width', 16)
-            .attr('height', 16)
-            .attr("id","annotation-close")
-            .attr("xlink:href", "../lib/closeblue.svg")
-            .on("click",function() {
-                tipg.selectAll("g").remove();
-                d3.selectAll(".circles").classed("focusCircle",false);
-                d3.select(".overlay1").style("pointer-events","all");
-            })
+            xclose = d3.select("rect.annotation-note-bg").attr("width");
+
+            d3.select(".annotation-note-content")
+              .append("svg:image")
+              .attr('x', xclose - 40)
+              .attr('y', -27)
+              .attr('width', 16)
+              .attr('height', 16)
+              .attr("id","annotation-close")
+              .attr("xlink:href", "../lib/closeblue.svg")
+              .on("click",function() {
+                  tipg.selectAll("g").remove();
+                  d3.selectAll(".circles").classed("focusCircle",false);
+                  d3.select(".overlay1").style("pointer-events","all");
+              })
+
+          }
+
 
 
           d3.select(".connector").attr("stroke","#236092")
@@ -503,11 +529,15 @@ function drawGraphic(){
           .attr('transform', 'translate(' + margin.left + ', ' + margin.top + ')')
           .attr('width', chart_width)
           .attr('height', height)
-          //.on('mouseover', function() { focus.style('display', null); })
+          .on('click', hover)
           .on('mouseout', function() {tipg.selectAll("g").remove(); d3.selectAll(".circles").classed("focusCircle",false); })
           .on('mousemove', hover)
 
           function hover() {
+
+              selectchange = false;
+              borders = {top:15, left:15, bottom:15, right:15};
+              notePadding = 15;
 
               var [mx, my] = d3.mouse(this);
 
@@ -585,34 +615,58 @@ function drawGraphic(){
 
         codes = graphic_data.map(function(d) { return "c" + d.uk_2010_soc_code; });
 
-        mergedvars = d3.zip(hier,labels,codes)
+        mergedvars = d3.zip(hier,labels,codes).sort(function(a, b){ return d3.ascending(a[1], b[1]); })
 
-        console.log(hierarchy)
+        //console.log(mergedvars)
+        //Make hierarchy dropdown
+        // hierarchy.forEach(function(k,j) {
+        //
+        //
+        //   optgroup = d3.select("#varselect")
+        //     //.attr("name","select")
+        //     .on("change", function(){
+        //       selectchange = true;
+        //       borders = {top:35, left:15, bottom:15, right:15}
+        //       notePadding = 35;
+        //       selectCircle();
+        //     })
+        //     .append("optgroup")
+        //     .attr("label",k)
+        //
+        //   optgroup.selectAll('option')
+        //       .data(mergedvars.filter(function(d,i){return d[0] == hierarchy[j]}))
+        //       .enter()
+        //       .append("option")
+        //       .attr("value", function(d,i){return d[2]})
+        //       .text(function(d,i) {
+        //         var value = parseFloat(d[1]).toFixed(1);
+        //         return d[1];
+        //       })
+        //
+        //
+        //
+        //   count = count + mergedvars.filter(function(d,i){return d[0] == hierarchy[j]}).length;
 
-        hierarchy.forEach(function(k,j) {
+
+        //Make standard dropdown
+        d3.select("#varselect")
+          .on("change", function(){
+            selectchange = true;
+            borders = {top:35, left:15, bottom:15, right:15}
+            notePadding = 35;
+            selectCircle();
+          })
+          .selectAll("options")
+          .data(mergedvars)
+          .enter()
+          .append("option")
+          .attr("value", function(d,i){return d[2]})
+          .text(function(d,i) {
+            var value = parseFloat(d[1]).toFixed(1);
+            return d[1];
+          })
 
 
-          optgroup = d3.select("#varselect")
-            //.attr("name","select")
-            .on("change",selectCircle)
-            .append("optgroup")
-            .attr("label",k)
-
-          optgroup.selectAll('option')
-              .data(mergedvars.filter(function(d,i){return d[0] == hierarchy[j]}))
-              .enter()
-              .append("option")
-              .attr("value", function(d,i){return d[2]})
-              .text(function(d,i) {
-                var value = parseFloat(d[1]).toFixed(1);
-                return d[1];
-              })
-
-
-
-          count = count + mergedvars.filter(function(d,i){return d[0] == hierarchy[j]}).length;
-
-      });
 
       function selectCircle() {
 
