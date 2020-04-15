@@ -488,6 +488,7 @@ function drawGraphic(){
                   tipg.selectAll("g").remove();
                   d3.selectAll(".circles").classed("focusCircle",false);
                   d3.select(".overlay1").style("pointer-events","all");
+                  d3.select(".placeholder").property("selected",true)
               })
 
           }
@@ -649,14 +650,20 @@ function drawGraphic(){
 
 
         //Make standard dropdown
-        d3.select("#varselect")
+        selector = d3.select("#varselect")
           .on("change", function(){
             selectchange = true;
             borders = {top:35, left:15, bottom:15, right:15}
             notePadding = 35;
             selectCircle();
-          })
-          .selectAll("options")
+          });
+
+        selector.append("option")
+          .text("Select an occupation")
+          .attr("class","placeholder")
+          .property("disabled",true);
+
+        selector.selectAll("barry")
           .data(mergedvars)
           .enter()
           .append("option")
