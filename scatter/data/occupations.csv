@@ -1,14 +1,14 @@
 ﻿id,uk_2010_soc_code,name,proximity,exposure,in_employment,grouphier,group
-54,2139,Information technology and telecommunications professionals,-9,12,59880,Professional Occupations,grp2
-50,2134,IT project and programme managers,-9,16,75724,Professional Occupations,grp2
-123,3219,Health associate professionals,-9,32,42351,Associate Professional And Technical Occupations,grp3
-118,3132,IT user support technicians,-9,33,118479,Associate Professional And Technical Occupations,grp3
-49,2133,IT specialist managers,-9,48,189016,Professional Occupations,grp2
-129,3311,NCOs and other ranks,-9,49,49815,Associate Professional And Technical Occupations,grp3
-2,1116,Elected officers and representatives,-9,52,7459,"Managers, Directors And Senior Officials",grp1
-351,9232,Street cleaners,-9,69,12771,Elementary Occupations,grp9
-53,2137,Web design and development professionals,-9,72,59880,Professional Occupations,grp2
-16,1171,Officers in armed forces,-9,78,38510,"Managers, Directors And Senior Officials",grp1
+54,2139,Information technology and telecommunications professionals,3,12,59880,Professional Occupations,grp2
+50,2134,IT project and programme managers,3,16,75724,Professional Occupations,grp2
+123,3219,Health associate professionals,3,32,42351,Associate Professional And Technical Occupations,grp3
+118,3132,IT user support technicians,3,33,118479,Associate Professional And Technical Occupations,grp3
+49,2133,IT specialist managers,3,48,189016,Professional Occupations,grp2
+129,3311,NCOs and other ranks,3,49,49815,Associate Professional And Technical Occupations,grp3
+2,1116,Elected officers and representatives,3,52,7459,"Managers, Directors And Senior Officials",grp1
+351,9232,Street cleaners,3,69,12771,Elementary Occupations,grp9
+53,2137,Web design and development professionals,3,72,59880,Professional Occupations,grp2
+16,1171,Officers in armed forces,3,78,38510,"Managers, Directors And Senior Officials",grp1
 135,3411,Artists,21.5,28,66614,Associate Professional And Technical Occupations,grp3
 334,8223,Agricultural machinery drivers,26.5,67,10063,"Process, Plant And Machine Operatives",grp8
 116,3122,Draughtspersons,29.5,75,43967,Associate Professional And Technical Occupations,grp3
@@ -47,7 +47,7 @@
 101,2452,Archivists and curators,44,1,13577,Professional Occupations,grp2
 6,1131,Financial managers and directors,44,14,322944,"Managers, Directors And Senior Officials",grp1
 179,4124,Finance officers,44,37,42749,Administrative And Secretarial Occupations,grp4
-307,8119,Process operatives,44,40,*,"Process, Plant And Machine Operatives",grp8
+307,8119,Process operatives,44,40,1000,"Process, Plant And Machine Operatives",grp8
 158,3538,Financial accounts managers,44,41,176939,Associate Professional And Technical Occupations,grp3
 177,4122,"Book-keepers, payroll managers and wages clerks",44,44,433867,Administrative And Secretarial Occupations,grp4
 194,4214,Company secretaries,44,95,37779,Administrative And Secretarial Occupations,grp4
@@ -116,7 +116,7 @@
 193,4213,School secretaries,50,63,73143,Administrative And Secretarial Occupations,grp4
 333,8222,Fork-lift truck drivers,50,100,90067,"Process, Plant And Machine Operatives",grp8
 335,8229,Mobile machine drivers and operatives,50.4,4,10063,"Process, Plant And Machine Operatives",grp8
-242,5421,Pre-press technicians,50.5,8,*,Skilled Trades Occupations,grp5
+242,5421,Pre-press technicians,50.5,8,1000,Skilled Trades Occupations,grp5
 342,9112,Forestry workers,50.5,76,7500,Elementary Occupations,grp9
 73,2311,Higher education teaching professionals,50.66666667,90,161935,Professional Occupations,grp2
 278,6231,Housekeepers and related occupations,51,11,47231,"Caring, Leisure And Other Service Occupations",grp6
@@ -135,10 +135,10 @@
 196,4216,Receptionists,52,58,255123,Administrative And Secretarial Occupations,grp4
 254,5449,Other skilled trades,52,96,13853,Skilled Trades Occupations,grp5
 186,4138,Human resources administrative occupations,53,27,32038,Administrative And Secretarial Occupations,grp4
-94,2435,Chartered architectural technologists,53,46,*,Professional Occupations,grp2
+94,2435,Chartered architectural technologists,53,46,1000,Professional Occupations,grp2
 90,2431,Architects,53,67,53650,Professional Occupations,grp2
 143,3422,"Product, clothing and related designers",53.08333333,38,82237,Associate Professional And Technical Occupations,grp3
-309,8122,Coal mine operatives,53.28571429,52,*,"Process, Plant And Machine Operatives",grp8
+309,8122,Coal mine operatives,53.28571429,52,1000,"Process, Plant And Machine Operatives",grp8
 316,8131,Assemblers (electrical and electronic products),53.4,11,28000,"Process, Plant And Machine Operatives",grp8
 209,5221,Metal machining setters and setter-operators,53.63636364,51,46298,Skilled Trades Occupations,grp5
 312,8125,Metal working machine operatives,53.63636364,78,69778,"Process, Plant And Machine Operatives",grp8
@@ -164,8 +164,8 @@
 79,2318,Education advisers and school inspectors,55,19,23445,Professional Occupations,grp2
 13,1150,Financial institution managers and directors,55,24,91352,"Managers, Directors And Senior Officials",grp1
 34,1254,Shopkeepers and proprietors – wholesale and retail,55,40,120349,"Managers, Directors And Senior Officials",grp1
-306,8118,Electroplaters,55,43,*,"Process, Plant And Machine Operatives",grp8
-237,5411,Weavers and knitters,55,49,*,Skilled Trades Occupations,grp5
+306,8118,Electroplaters,55,43,1000,"Process, Plant And Machine Operatives",grp8
+237,5411,Weavers and knitters,55,49,1000,Skilled Trades Occupations,grp5
 246,5432,Bakers and flour confectioners,55,49,29947,Skilled Trades Occupations,grp5
 355,9236,Vehicle valeters and cleaners,55,52,24122,Elementary Occupations,grp9
 47,2127,Production and process engineers,55,63,41790,Professional Occupations,grp2
@@ -274,7 +274,7 @@
 219,5237,Rail and rolling stock builders and repairers,68.44444444,87,9046,Skilled Trades Occupations,grp5
 211,5223,Metal working production and maintenance fitters,68.44444444,93,214364,Skilled Trades Occupations,grp5
 326,8149,Construction operatives,68.5,52,11623,"Process, Plant And Machine Operatives",grp8
-204,5212,"Moulders, core makers and die casters",68.5,78,*,Skilled Trades Occupations,grp5
+204,5212,"Moulders, core makers and die casters",68.5,78,1000,Skilled Trades Occupations,grp5
 231,5316,"Glaziers, window fabricators and fitters",69,31,36156,Skilled Trades Occupations,grp5
 361,9251,Shelf fillers,69,31,109680,Elementary Occupations,grp9
 213,5225,Air-conditioning and refrigeration engineers,69,88,18109,Skilled Trades Occupations,grp5
@@ -296,7 +296,7 @@
 69,2223,Speech and language therapists,73,33,14617,Professional Occupations,grp2
 145,3442,"Sports coaches, instructors and officials",73.66666667,28,109166,Associate Professional And Technical Occupations,grp3
 329,8213,Bus and coach drivers,73.75,0,137562,"Process, Plant And Machine Operatives",grp8
-147,3511,Air traffic controllers,74,81,*,Associate Professional And Technical Occupations,grp3
+147,3511,Air traffic controllers,74,81,1000,Associate Professional And Technical Occupations,grp3
 337,8232,Marine and waterways transport operatives,74,93,7963,"Process, Plant And Machine Operatives",grp8
 76,2315,Primary and nursery education teaching professionals,74.5,79,424876,Professional Occupations,grp2
 366,9273,Waiters and waitresses,75,11,261349,Elementary Occupations,grp9
@@ -362,9 +362,9 @@
 63,2216,Veterinarians,91,35,19941,Professional Occupations,grp2
 276,6221,Hairdressers and barbers,91.33333333,4,161728,"Caring, Leisure And Other Service Occupations",grp6
 137,3413,"Actors, entertainers and presenters",95,3,37443,Associate Professional And Technical Occupations,grp3
-67,2221,Physiotherapists,96.5,37,59892,Professional Occupations,grp2
-62,2215,Dental practitioners,97,50,34747,Professional Occupations,grp2
-264,6142,Ambulance staff (excluding paramedics),97,47,23643,"Caring, Leisure And Other Service Occupations",grp6
-72,2232,Midwives,97,98,36288,Professional Occupations,grp2
-119,3213,Paramedics,97,76,25640,Associate Professional And Technical Occupations,grp3
-265,6143,Dental nurses,99.5,60,52518,"Caring, Leisure And Other Service Occupations",grp6
+67,2221,Physiotherapists,96.5,30,59892,Professional Occupations,grp2
+62,2215,Dental practitioners,97,69,34747,Professional Occupations,grp2
+264,6142,Ambulance staff (excluding paramedics),97,86,23643,"Caring, Leisure And Other Service Occupations",grp6
+72,2232,Midwives,97,84,36288,Professional Occupations,grp2
+119,3213,Paramedics,97,97,25640,Associate Professional And Technical Occupations,grp3
+265,6143,Dental nurses,99.5,99,52518,"Caring, Leisure And Other Service Occupations",grp6
