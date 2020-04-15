@@ -7,19 +7,7 @@
             "sourceText":["My source information text here"],
             "sourceURL":["http://www.ons.gov.uk/"],
             "rectannotations":[],
-            "textAnnotations":[{
-              "x":0.5,
-              "y":-0.5,
-                "text":"2008-2009"
-              },{
-                "x":4,
-                "y":0.6,
-                "text":"1997-2007"
-                },{
-                "x":2,
-                "y":2,
-                "text":"2010-2016"
-                }],
+            "textAnnotations":[],
             "textAnnotationWrap":100,
             "d3AnnotationWrap":200,
             "xAxisLabel":"Physical proximity to others",
@@ -43,7 +31,7 @@
             "x_num_ticks_sm_md_lg" : [4,5,5],
             "y_num_ticks_sm_md_lg" : [4,5,5],
 
-            "annotateLineX1_Y1_X2_Y2":[[[0,1],[42,1]],[[-1,0],[5,0]]],
+            "annotateLineX1_Y1_X2_Y2":[],
             "lineColor_opcty" : [["#666", 0.5],["#666", 0.5]]
 
 
