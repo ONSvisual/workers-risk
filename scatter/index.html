@@ -56,6 +56,13 @@
             stroke-width: 3px;
         }
 
+        .highlightedCircle {
+            fill: orange;
+            stroke: orange;
+            stroke-width: 2px;
+        }
+
+
         .focusUK {
             fill: #000;
         }
@@ -402,6 +409,11 @@ function drawGraphic(){
                     .attr("class","annotext")
                     .text(d.text)
                     .call(wrap,dvc.essential.textAnnotationWrap);
+
+                      console.log(d)
+                    d3.selectAll("#c" + d.soc).classed("highlightedCircle",true).raise();
+
+
                   })
 
 //d3-annotations tooltips(from https://bl.ocks.org/Fil/17fc857c3ce36bf8e21ddefab8bc9af4/167bce6e2b706016004a3baf14f838203646a27a)

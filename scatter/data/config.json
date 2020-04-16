@@ -8,13 +8,15 @@
             "sourceURL":["http://www.ons.gov.uk/"],
             "rectannotations":[],
             "textAnnotations":[{
-              "x":0.5,
-              "y":-0.5,
-                "text":"2008-2009"
+                "x":93,
+                "y":56,
+                "text":"Nurses",
+                "soc":"2231"
               },{
-                "x":4,
-                "y":0.6,
-                "text":"1997-2007"
+                "x":88,
+                "y":93,
+                "text":"Paramedics",
+                "soc":"3213"
                 },{
                 "x":2,
                 "y":2,
