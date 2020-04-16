@@ -54,6 +54,13 @@
             stroke-width: 3px;
         }
 
+        .highlightedCircle {
+            fill: orange;
+            stroke: orange;
+            stroke-width: 2px;
+        }
+
+
         .focusUK {
             fill: #000;
         }
@@ -423,6 +430,11 @@ function drawGraphic(){
                     .attr("class","annotext")
                     .text(d.text)
                     .call(wrap,dvc.essential.textAnnotationWrap);
+
+                      console.log(d)
+                    d3.selectAll("#c" + d.soc).classed("highlightedCircle",true).raise();
+
+
                   })
 
 //d3-annotations tooltips(from https://bl.ocks.org/Fil/17fc857c3ce36bf8e21ddefab8bc9af4/167bce6e2b706016004a3baf14f838203646a27a)
@@ -435,7 +447,6 @@ function drawGraphic(){
       // this function will call d3.annotation when a tooltip has to be drawn
         function tip (d) {
 
-          console.log(d)
           annotationtip = d3.annotation()
           .type(d3.annotationLabel)
           .notePadding(notePadding)
@@ -496,7 +507,7 @@ function drawGraphic(){
 
 
           d3.select(".connector").attr("stroke","#236092")
-        }
+        } //end tip()
 
       //voronoi
 
@@ -554,8 +565,9 @@ function drawGraphic(){
               splitString = classString.split(" ");
               d3.selectAll(".circles").classed("focusCircle",false);
               d3.selectAll("." + splitString[2]).classed("focusCircle",true).raise();
-              console.log(splitString[2])
-
+              code = d3.select(".index" + site.index).attr("id")
+              console.log(code)
+              $("#varselect").val(code);
 
 
               tip(site);//tooltip stuff
@@ -603,6 +615,8 @@ function drawGraphic(){
           }
         });
       }
+
+
 
       function drawSelect() {
 
@@ -674,12 +688,13 @@ function drawGraphic(){
           })
 
 
-
       function selectCircle() {
 
-        //
+        console.log("selectCircle")
 
         selocc = d3.select("#varselect").node().value;
+        window.location.hash = selocc;
+
 
         //layername = d3.select(this).node().value;
         d3.select(".overlay1").style("pointer-events","none");
@@ -711,14 +726,57 @@ function drawGraphic(){
         console.log(myObj)
         tip(myObj)
 
-      }
+      } //end selectCircle
+    }//end drawSelect
+    function checkUrl() {
 
+     urlLocal = window.location.href;
 
-      }
+     var listnamesLocal = urlLocal.split("#")[1];
+    console.log(urlLocal)
+     if(listnamesLocal != undefined) {
 
+       listnamesA = listnamesLocal.split(',').slice(0).join(',');
 
+       listnames = 	listnamesA.split(',');
 
+        d3.selectAll(".circles").classed("focusCircle",false);
+        d3.selectAll("#" + listnames).classed("focusCircle",true).raise();
+        $("#varselect").val(listnames);
+
+        d3.select(".overlay1").style("pointer-events","none");
+
+        d3.selectAll(".circles").classed("focusCircle",false);
+        d3.selectAll("#" + listnames[0]).classed("focusCircle",true).raise();
+
+        xpos = d3.selectAll("#" + listnames[0]).attr("cx");
+        ypos = d3.selectAll("#" + listnames[0]).attr("cy");
+
+        classString = d3.select("#" + listnames[0]).attr("class");
+
+        splitString = classString.split(" ");
+
+        indexString = splitString[3].split("index");
+
+        myObj = {}
+
+        myObj[0] = xpos;
+        myObj[1] = ypos;
+
+        xVal = x.invert(xpos);
+        yVal =y.invert(ypos);
+        myObj['data'] = [xVal,yVal];
+        myObj['index'] = indexString[1]
+
+        tip(myObj)
+     }
+
+    }//end checkUrl
+
+checkUrl()
 }//end drawGraphic
+
+
 
 
     //then, onload, check to see if the web browser can handle 'inline svg'

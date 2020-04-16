@@ -7,7 +7,21 @@
             "sourceText":["My source information text here"],
             "sourceURL":["http://www.ons.gov.uk/"],
             "rectannotations":[],
-            "textAnnotations":[],
+            "textAnnotations":[{
+                "x":93,
+                "y":56,
+                "text":"Nurses",
+                "soc":"2231"
+              },{
+                "x":88,
+                "y":93,
+                "text":"Paramedics",
+                "soc":"3213"
+                },{
+                "x":2,
+                "y":2,
+                "text":"Doctors"
+                }],
             "textAnnotationWrap":100,
             "d3AnnotationWrap":200,
             "xAxisLabel":"Physical proximity to others",
