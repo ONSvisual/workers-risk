@@ -32,11 +32,11 @@
 
 	},
     "optional" : {
-            "margin_sm": [50 ,20, 10, 50],
-            "margin_md": [50, 20, 10, 50],
-            "margin_lg": [50, 50, 10, 50],
+            "margin_sm": [50 ,20, 10, 25],
+            "margin_md": [50, 20, 10, 25],
+            "margin_lg": [50, 50, 10, 25],
 
-            "aspectRatio_sm" : [1.5,1],
+            "aspectRatio_sm" : [1,1.6],
             "aspectRatio_md" : [1.5,1],
             "aspectRatio_lg" : [1.5,1],
 
@@ -45,7 +45,7 @@
             "x_num_ticks_sm_md_lg" : [4,5,5],
             "y_num_ticks_sm_md_lg" : [4,5,5],
 
-            "annotateLineX1_Y1_X2_Y2":[[[0,1],[42,1]],[[-1,0],[5,0]]],
+            "annotateLineX1_Y1_X2_Y2":[],
             "lineColor_opcty" : [["#666", 0.5],["#666", 0.5]]
 
 
