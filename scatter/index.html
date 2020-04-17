@@ -231,14 +231,14 @@ function drawGraphic(){
 
       var minR = d3.min(d3.entries(dots), function(c) {
         									return d3.min(c.value, function(v) {
-        										var n = v.size;
-        										return Math.floor(n);
+        										var n = Math.sqrt(v.size/Math.PI);
+        										return n;
         									});
         								})
       var maxR = d3.max(d3.entries(dots), function(c) {
         									return d3.max(c.value, function(v) {
-        										var n = v.size;
-        										return Math.ceil(n);
+                            var n = Math.sqrt(v.size/Math.PI);
+        										return n;
         									});
         								})
       }else{
@@ -248,19 +248,19 @@ function drawGraphic(){
         var maxY = dvc.essential.yAxisScale[1];
         var minR = d3.min(d3.entries(dots), function(c) {
                             return d3.min(c.value, function(v) {
-                              var n = v.size;
-                              return Math.floor(n);
+                              var n = Math.sqrt(v.size/Math.PI);
+                              return n;
                             });
                           })
         var maxR = d3.max(d3.entries(dots), function(c) {
                             return d3.max(c.value, function(v) {
-                              var n = v.size;
-                              return Math.ceil(n);
+                              var n = Math.sqrt(v.size/Math.PI);
+                              return n;
                             });
                           })
       }
 
-
+      console.log(maxR)
 
       var ratio =  height / chart_width;
 
@@ -273,7 +273,7 @@ function drawGraphic(){
                      .domain([minY, maxY]);
 
        r = d3.scaleLinear()
-                     .range([0, 100])
+                     .range([0, 30])
                      .domain([minR, maxR]);
 
 
@@ -361,7 +361,7 @@ function drawGraphic(){
             .attr( "id" , function (d,i){ return "c" + d.uk_2010_soc_code; })
             .attr( "cx" , function(d) { return x(d[dvc.essential.pickxdata]); })
     				.attr( "cy" , function(d) { return y(d[dvc.essential.pickydata]); })
-            .attr('r', function(d) { return r(d.in_employment); })
+            .attr('r', function(d) {console.log(r(Math.sqrt(d.in_employment/Math.PI))); return  r(Math.sqrt(d.in_employment/Math.PI) ); })
           //  .attr('fill', function(d) { return y(d[dvc.essential.pickydata]); })
           //  .attr('stroke', "red")
             .attr("opacity", 0.6)
