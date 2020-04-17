@@ -7,21 +7,32 @@
             "sourceText":["My source information text here"],
             "sourceURL":["http://www.ons.gov.uk/"],
             "rectannotations":[],
-            "textAnnotations":[{
-                "x":93,
-                "y":56,
+            "textAnnotations":[
+              {
+                "x":80,
+                "y":94,
                 "text":"Nurses",
                 "soc":"2231"
-              },{
-                "x":88,
-                "y":93,
+              },
+              {
+                "x":93,
+                "y":86,
                 "text":"Paramedics",
                 "soc":"3213"
-                },{
-                "x":2,
-                "y":2,
-                "text":"Doctors"
-                }],
+              },
+              {
+                "x":90.5,
+                "y":95,
+                "text":"Medical practitioners",
+                "soc":"2211"
+              },
+              {
+              "x":87.5,
+              "y":43.5,
+              "text":"Care workers and home carers",
+              "soc":"6145"
+              }
+              ],
             "textAnnotationWrap":100,
             "d3AnnotationWrap":200,
             "xAxisLabel":"Physical proximity to others",
