@@ -361,7 +361,7 @@ function drawGraphic(){
             .attr( "id" , function (d,i){ return "c" + d.uk_2010_soc_code; })
             .attr( "cx" , function(d) { return x(d[dvc.essential.pickxdata]); })
     				.attr( "cy" , function(d) { return y(d[dvc.essential.pickydata]); })
-            .attr('r', function(d) {console.log(d.uk_2010_soc_code+"  "+d.in_employment+" "+r(Math.sqrt(d.in_employment/Math.PI) )); return  r(Math.sqrt(d.in_employment/Math.PI) ); })
+            .attr('r', function(d) {console.log(r(Math.sqrt(d.in_employment/Math.PI))); return  r(Math.sqrt(d.in_employment/Math.PI) ); })
           //  .attr('fill', function(d) { return y(d[dvc.essential.pickydata]); })
           //  .attr('stroke', "red")
             .attr("opacity", 0.6)
