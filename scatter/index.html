@@ -55,8 +55,8 @@
         }
 
         .highlightedCircle {
-            fill: orange;
-            stroke: orange;
+            fill: teal;
+            stroke: #212121;
             stroke-width: 2px;
         }
 
@@ -361,7 +361,7 @@ function drawGraphic(){
             .attr( "id" , function (d,i){ return "c" + d.uk_2010_soc_code; })
             .attr( "cx" , function(d) { return x(d[dvc.essential.pickxdata]); })
     				.attr( "cy" , function(d) { return y(d[dvc.essential.pickydata]); })
-            .attr('r', function(d) {console.log(r(Math.sqrt(d.in_employment/Math.PI))); return  r(Math.sqrt(d.in_employment/Math.PI) ); })
+            .attr('r', function(d) { return  r(Math.sqrt(d.in_employment/Math.PI) ); })
           //  .attr('fill', function(d) { return y(d[dvc.essential.pickydata]); })
           //  .attr('stroke', "red")
             .attr("opacity", 0.6)
@@ -436,7 +436,7 @@ function drawGraphic(){
                     .call(wrap,dvc.essential.textAnnotationWrap);
 
                       console.log(d)
-                    d3.selectAll("#c" + d.soc).classed("highlightedCircle",true).raise();
+                    //d3.selectAll("#c" + d.soc).classed("highlightedCircle",true).raise();
 
 
                   })
@@ -570,7 +570,7 @@ function drawGraphic(){
               d3.selectAll(".circles").classed("focusCircle",false);
               d3.selectAll("." + splitString[2]).classed("focusCircle",true).raise();
               code = d3.select(".index" + site.index).attr("id")
-              console.log(code)
+              //console.log(code)
               $("#varselect").val(code);
 
 
@@ -743,36 +743,48 @@ function drawGraphic(){
        listnamesA = listnamesLocal.split(',').slice(0).join(',');
 
        listnames = 	listnamesA.split(',');
+       console.log(listnames)
 
+      if(listnames.length == 1){
+            d3.selectAll(".circles").classed("focusCircle",false);
+            d3.selectAll("#" + listnames).classed("focusCircle",true).raise();
+            $("#varselect").val(listnames);
+
+            d3.select(".overlay1").style("pointer-events","none");
+
+            d3.selectAll(".circles").classed("focusCircle",false);
+            d3.selectAll("#" + listnames[0]).classed("focusCircle",true).raise();
+
+            xpos = d3.selectAll("#" + listnames[0]).attr("cx");
+            ypos = d3.selectAll("#" + listnames[0]).attr("cy");
+
+            classString = d3.select("#" + listnames[0]).attr("class");
+
+            splitString = classString.split(" ");
+
+            indexString = splitString[3].split("index");
+
+            myObj = {}
+
+            myObj[0] = xpos;
+            myObj[1] = ypos;
+
+            xVal = x.invert(xpos);
+            yVal =y.invert(ypos);
+            myObj['data'] = [xVal,yVal];
+            myObj['index'] = indexString[1]
+
+            tip(myObj)
+      } else {
         d3.selectAll(".circles").classed("focusCircle",false);
-        d3.selectAll("#" + listnames).classed("focusCircle",true).raise();
-        $("#varselect").val(listnames);
 
-        d3.select(".overlay1").style("pointer-events","none");
+        listnames.forEach(function(d,i) {
+          d3.selectAll("#" + listnames[i]).classed("highlightedCircle",true).raise();
+        });
 
-        d3.selectAll(".circles").classed("focusCircle",false);
-        d3.selectAll("#" + listnames[0]).classed("focusCircle",true).raise();
 
-        xpos = d3.selectAll("#" + listnames[0]).attr("cx");
-        ypos = d3.selectAll("#" + listnames[0]).attr("cy");
+      }
 
-        classString = d3.select("#" + listnames[0]).attr("class");
-
-        splitString = classString.split(" ");
-
-        indexString = splitString[3].split("index");
-
-        myObj = {}
-
-        myObj[0] = xpos;
-        myObj[1] = ypos;
-
-        xVal = x.invert(xpos);
-        yVal =y.invert(ypos);
-        myObj['data'] = [xVal,yVal];
-        myObj['index'] = indexString[1]
-
-        tip(myObj)
      }
 
     }//end checkUrl
