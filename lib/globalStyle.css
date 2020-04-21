@@ -34,7 +34,7 @@
 
         body /* required */
 		{
-            font-family: 'Open Sans', sans-serif;
+            font-family: 'Open Sans', sans-serif !important;
 			font-weight:400;
 			max-width:950px;
         }
@@ -101,6 +101,7 @@
 		{
             font-size: 12px;
             fill: #666;
+            font-family: "Open Sans";
         }
 
 
