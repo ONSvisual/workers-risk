@@ -196,6 +196,7 @@ function drawGraphic(){
   return data;
 }
       var svg = d3.select('#graphic').append('svg')
+                  .style("position","relative")
                   .attr('width', chart_width + margin.left + margin.right)
                   .attr('height', height + margin.top + margin.bottom +50);
 
@@ -775,12 +776,38 @@ function drawGraphic(){
             myObj['index'] = indexString[1]
 
             tip(myObj)
+
       } else {
+
         d3.selectAll(".circles").classed("focusCircle",false);
 
         listnames.forEach(function(d,i) {
           d3.selectAll("#" + listnames[i]).classed("highlightedCircle",true).raise();
+
+          //get the name of the occupation based on the code
+          namex = graphic_data.filter(function(data,i){return d == "c" + data.uk_2010_soc_code})
+
+          //add in a label (but don't place it yet)
+          d3.select("#graphic")
+              .append("p")
+              .attr("id","labeltext" + i)
+              .style("position","absolute")
+              .style("text-align","center")
+              .style("width","100px")
+              .text(namex[0].name);
+
+          //works out the label height so you know how much to offset the label
+
+          labelheight = parseInt(d3.select("#labeltext" + i).style("height"));
+
+          d3.select("#labeltext" + i)
+              .style("left",x(namex[0].proximity) + margin.left - 50 + "px")
+              .style("top",y(namex[0].exposure)  + margin.top - labelheight - r(Math.sqrt(namex[0].in_employment/Math.PI) ) + "px")
+
+
         });
+
+
 
 
       }
