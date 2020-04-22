@@ -83,6 +83,7 @@
             background: white;
             height: 45px;
             border: none;
+            z-index:2;
           }
         }
 
@@ -95,6 +96,7 @@
             height: 45px;
             left: 40px;
             border: none;
+            z-index:2;
           }
 
         }
@@ -130,6 +132,7 @@ var makeAnnotations;
 var notePadding = 35;
 var borders = {top:35, left:15, bottom:15, right:15};
 var selectchange = true;
+var overcircle = false;
 
 
 
@@ -201,6 +204,7 @@ function drawGraphic(){
                   .attr('height', height + margin.top + margin.bottom +50);
 
       var g = svg.append('g')
+        .attr("id","svgg")
         .attr('transform', 'translate(' + margin.left + ', ' + margin.top + ')')
         .attr('overflow', 'hidden');
 
@@ -367,6 +371,8 @@ function drawGraphic(){
           //  .attr('stroke', "red")
             .attr("opacity", 0.6)
             .attr('stroke-width', 1)
+            .on("mouseout", function(){overcircle = false})
+            .on("mouseover",function(d,i){overcircle = true; circlesel=d.uk_2010_soc_code; hover()})
           //  .attr('class', 'circles');
 
 
@@ -542,7 +548,7 @@ function drawGraphic(){
 
       if ( parseInt(graphic.style("width")) > dvc.optional.mobileBreakpoint ) {
 
-      svg.append('rect').attr("class","overlay1")
+      svg.insert("rect","#svgg").attr("class","overlay1")
           .attr('transform', 'translate(' + margin.left + ', ' + margin.top + ')')
           .attr('width', chart_width)
           .attr('height', height)
@@ -552,32 +558,76 @@ function drawGraphic(){
 
           function hover() {
 
-              selectchange = false;
-              borders = {top:15, left:15, bottom:15, right:15};
-              notePadding = 15;
+            console.log(overcircle)
 
-              var [mx, my] = d3.mouse(this);
+              if(overcircle == false) {
 
 
-              // use the new diagram.find() function to find the Voronoi site
-              // closest to the mouse, limited by max distance voronoiRadius
-              var site = voronoi.find(mx, my, voronoiRadius);
+                selectchange = false;
+                borders = {top:15, left:15, bottom:15, right:15};
+                notePadding = 15;
 
-              //console.log(splited = str.split(" ");)
-
-              classString = d3.select(".index" + site.index).attr("class");
-
-              splitString = classString.split(" ");
-              d3.selectAll(".circles").classed("focusCircle",false);
-              d3.selectAll("." + splitString[2]).classed("focusCircle",true).raise();
-              code = d3.select(".index" + site.index).attr("id")
-              //console.log(code)
-              $("#varselect").val(code);
+                var [mx, my] = d3.mouse(this);
 
 
-              tip(site);//tooltip stuff
-              var xpos = site[0];
-              var ypos = site[1];
+                // use the new diagram.find() function to find the Voronoi site
+                // closest to the mouse, limited by max distance voronoiRadius
+                var site = voronoi.find(mx, my, voronoiRadius);
+
+                //console.log(splited = str.split(" ");)
+
+                classString = d3.select(".index" + site.index).attr("class");
+
+                splitString = classString.split(" ");
+                d3.selectAll(".circles").classed("focusCircle",false);
+                d3.selectAll("." + splitString[2]).classed("focusCircle",true)//.raise();
+                code = d3.select(".index" + site.index).attr("id")
+                //console.log(code)
+                $("#varselect").val(code);
+
+
+                tip(site);//tooltip stuff
+                var xpos = site[0];
+                var ypos = site[1];
+
+
+
+              } else {
+
+                selocc = d3.select("#c" + circlesel).attr("id");
+
+                d3.selectAll(".circles").classed("focusCircle",false);
+                d3.selectAll("#" + selocc).classed("focusCircle",true)//.raise();
+
+                xpos = d3.selectAll("#" + selocc).attr("cx");
+                ypos = d3.selectAll("#" + selocc).attr("cy");
+
+                classString = d3.select("#" + selocc).attr("class");
+
+                splitString = classString.split(" ");
+
+                console.log(splitString)
+
+                indexString = splitString[3].split("index");
+
+                myObj = {}
+
+                myObj[0] = xpos;
+                myObj[1] = ypos;
+
+                xVal = x.invert(xpos);
+                yVal =y.invert(ypos);
+                myObj['data'] = [xVal,yVal];
+                myObj['index'] = indexString[1]
+
+                console.log(myObj)
+                tip(myObj)
+
+
+
+              }
+
+
 
               // focus.select('#focusCircle')
               //     .attr('cx', xpos)
@@ -588,6 +638,8 @@ function drawGraphic(){
               // focus.select('#focusLineY')
               //     .attr('x1', x(x.domain()[0])).attr('y1', ypos)
               //     .attr('x2', xpos).attr('y2', ypos);
+
+
 
 
           }
@@ -705,7 +757,7 @@ function drawGraphic(){
         d3.select(".overlay1").style("pointer-events","none");
 
         d3.selectAll(".circles").classed("focusCircle",false);
-        d3.selectAll("#" + selocc).classed("focusCircle",true).raise();
+        d3.selectAll("#" + selocc).classed("focusCircle",true)//.raise();
 
         xpos = d3.selectAll("#" + selocc).attr("cx");
         ypos = d3.selectAll("#" + selocc).attr("cy");
@@ -748,13 +800,13 @@ function drawGraphic(){
 
       if(listnames.length == 1){
             d3.selectAll(".circles").classed("focusCircle",false);
-            d3.selectAll("#" + listnames).classed("focusCircle",true).raise();
+            d3.selectAll("#" + listnames).classed("focusCircle",true)//.raise();
             $("#varselect").val(listnames);
 
             d3.select(".overlay1").style("pointer-events","none");
 
             d3.selectAll(".circles").classed("focusCircle",false);
-            d3.selectAll("#" + listnames[0]).classed("focusCircle",true).raise();
+            d3.selectAll("#" + listnames[0]).classed("focusCircle",true)//.raise();
 
             xpos = d3.selectAll("#" + listnames[0]).attr("cx");
             ypos = d3.selectAll("#" + listnames[0]).attr("cy");
@@ -782,13 +834,13 @@ function drawGraphic(){
         d3.selectAll(".circles").classed("focusCircle",false);
 
         listnames.forEach(function(d,i) {
-          d3.selectAll("#" + listnames[i]).classed("highlightedCircle",true).raise();
+          d3.selectAll("#" + listnames[i]).classed("highlightedCircle",true)//.raise();
 
           //get the name of the occupation based on the code
           namex = graphic_data.filter(function(data,i){return d == "c" + data.uk_2010_soc_code})
 
           //add in a label (but don't place it yet)
-          d3.select("#graphic")
+          currlabel = d3.select("#graphic")
               .append("p")
               .attr("id","labeltext" + i)
               .style("position","absolute")
@@ -798,11 +850,10 @@ function drawGraphic(){
 
           //works out the label height so you know how much to offset the label
 
-          labelheight = parseInt(d3.select("#labeltext" + i).style("height"));
+          labelheight = parseInt(currlabel.style("height"));
 
-          d3.select("#labeltext" + i)
-              .style("left",x(namex[0].proximity) + margin.left - 50 + "px")
-              .style("top",y(namex[0].exposure)  + margin.top - labelheight - r(Math.sqrt(namex[0].in_employment/Math.PI) ) + "px")
+          currlabel.style("left",x(namex[0].proximity) + margin.left - 50 + "px")
+                   .style("top",y(namex[0].exposure)  + margin.top - labelheight - r(Math.sqrt(namex[0].in_employment/Math.PI) ) + "px")
 
 
         });

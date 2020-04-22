@@ -11,25 +11,25 @@
               {
                 "x":80,
                 "y":94,
-                "text":"Nurses",
+                "text":"",
                 "soc":"2231"
               },
               {
                 "x":93,
                 "y":86,
-                "text":"Paramedics",
+                "text":"",
                 "soc":"3213"
               },
               {
                 "x":90.5,
                 "y":95,
-                "text":"Medical practitioners",
+                "text":"",
                 "soc":"2211"
               },
               {
               "x":87.5,
               "y":43.5,
-              "text":"Care workers and home carers",
+              "text":"",
               "soc":"6145"
               }
               ],
