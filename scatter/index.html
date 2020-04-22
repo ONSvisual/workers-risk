@@ -338,10 +338,10 @@ function drawGraphic(){
          .append('clipPath')
          .attr('id', 'clip')
          .append('rect')
-           .attr('x', 0)
-           .attr('y', 0)
-           .attr('width', chart_width)
-           .attr('height', height);
+           .attr('x', -5)
+           .attr('y', -10)
+           .attr('width', 10+chart_width)
+           .attr('height', 20+height);
 
       var hulls = g.append('g')
           .attr('class','hulls')
@@ -465,7 +465,7 @@ function drawGraphic(){
             return {
               data: {x:d.data[0],y:d.data[1]},
               className: "show-bg",
-              dx: (d[0] > chart_width/2) ? -30 : 30,
+              dx: (d[0] > chart_width/2) ? -50 : 70,
               dy: (d[1] > height/2) ? -30 : 30,
 
               note: {
@@ -553,7 +553,7 @@ function drawGraphic(){
           .attr('width', chart_width)
           .attr('height', height)
           .on('click', hover)
-          .on('mouseout', function() {tipg.selectAll("g").remove(); d3.selectAll(".circles").classed("focusCircle",false); })
+          .on('mouseout', function() {tipg.selectAll("g").remove(); d3.selectAll(".circles").classed("focusCircle",false); $("#varselect").val("placeholder");})
           .on('mousemove', hover)
 
           function hover() {
@@ -732,6 +732,7 @@ function drawGraphic(){
         selector.append("option")
           .text("Select an occupation")
           .attr("class","placeholder")
+          .attr("value","placeholder")
           .property("disabled",true);
 
         selector.selectAll("barry")
@@ -790,13 +791,13 @@ function drawGraphic(){
      urlLocal = window.location.href;
 
      var listnamesLocal = urlLocal.split("#")[1];
-    console.log(urlLocal)
+    //console.log(urlLocal)
      if(listnamesLocal != undefined) {
 
        listnamesA = listnamesLocal.split(',').slice(0).join(',');
 
        listnames = 	listnamesA.split(',');
-       console.log(listnames)
+      // console.log(listnames)
 
       if(listnames.length == 1){
             d3.selectAll(".circles").classed("focusCircle",false);
