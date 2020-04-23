@@ -37,7 +37,7 @@
             "d3AnnotationWrap":200,
             "xAxisLabel":"Physical proximity to others",
             "yAxisLabel":"Exposure to diseases",
-            "AxisScale":"auto_min_max",
+            "AxisScale":"",
       			"xAxisScale":[0,100],
       			"yAxisScale":[0,100]
 
@@ -53,8 +53,8 @@
 
             "mobileBreakpoint" : 610,
 
-            "x_num_ticks_sm_md_lg" : [4,5,5],
-            "y_num_ticks_sm_md_lg" : [4,5,5],
+            "x_num_ticks_sm_md_lg" : [4,4,4],
+            "y_num_ticks_sm_md_lg" : [4,4,4],
 
             "annotateLineX1_Y1_X2_Y2":[],
             "lineColor_opcty" : [["#666", 0.5],["#666", 0.5]]

@@ -293,19 +293,25 @@ function drawGraphic(){
     //specify number or ticks on y axis
   	if (parseInt(graphic.style("width") ) <= threshold_sm) {
   		yAxis.ticks(dvc.optional.y_num_ticks_sm_md_lg[0])
+            .tickValues([0,25,50,75,100])
   	 } else if (parseInt(graphic.style("width") ) <= threshold_md){
   		yAxis.ticks(dvc.optional.y_num_ticks_sm_md_lg[1])
+            .tickValues([0,25,50,75,100])
   	 } else {
   		yAxis.ticks(dvc.optional.y_num_ticks_sm_md_lg[2])
+            .tickValues([0,25,50,75,100])
   	 }
 
      //specify number or ticks on y axis
     if (parseInt(graphic.style("width") ) <= threshold_sm) {
       xAxis.ticks(dvc.optional.x_num_ticks_sm_md_lg[0])
+            .tickValues([0,25,50,75,100])
      } else if (parseInt(graphic.style("width") ) <= threshold_md){
       xAxis.ticks(dvc.optional.x_num_ticks_sm_md_lg[1])
+            .tickValues([0,25,50,75,100])
      } else {
       xAxis.ticks(dvc.optional.x_num_ticks_sm_md_lg[2])
+          .tickValues([0,25,50,75,100])
      }
 
 
@@ -508,7 +514,7 @@ function drawGraphic(){
               .attr("xlink:href", "../lib/closeblue.svg")
               .on("click",function() {
                   tipg.selectAll("g").remove();
-                  d3.selectAll(".circles").classed("focusCircle",false);
+                  d3.selectAll(".circles").classed("focusCircle",false).style("pointer-events","all");;
                   d3.select(".overlay1").style("pointer-events","all");
                   d3.select(".placeholder").property("selected",true)
               })
@@ -757,7 +763,7 @@ function drawGraphic(){
         //layername = d3.select(this).node().value;
         d3.select(".overlay1").style("pointer-events","none");
 
-        d3.selectAll(".circles").classed("focusCircle",false);
+        d3.selectAll(".circles").classed("focusCircle",false).style("pointer-events","none");
         d3.selectAll("#" + selocc).classed("focusCircle",true)//.raise();
 
         xpos = d3.selectAll("#" + selocc).attr("cx");
@@ -806,7 +812,7 @@ function drawGraphic(){
 
             d3.select(".overlay1").style("pointer-events","none");
 
-            d3.selectAll(".circles").classed("focusCircle",false);
+            d3.selectAll(".circles").classed("focusCircle",false).style("pointer-events","none");
             d3.selectAll("#" + listnames[0]).classed("focusCircle",true)//.raise();
 
             xpos = d3.selectAll("#" + listnames[0]).attr("cx");
