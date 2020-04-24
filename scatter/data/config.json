@@ -4,7 +4,7 @@
             "pickxdata":"proximity",
             "pickydata":"exposure",
             "fills":["#ccc","#ccc","#ccc","#ccc","#ccc","#ccc","#ccc","#ccc","#ccc"],
-            "sourceText":["My source information text here"],
+            "sourceText":["Office for National Statistics"],
             "sourceURL":["http://www.ons.gov.uk/"],
             "rectannotations":[],
             "textAnnotations":[
@@ -43,13 +43,13 @@
 
 	},
     "optional" : {
-            "margin_sm": [50 ,20, 10, 25],
-            "margin_md": [50, 20, 10, 25],
-            "margin_lg": [50, 50, 10, 25],
+            "margin_sm": [50 ,20, 10, 35],
+            "margin_md": [50, 20, 10, 35],
+            "margin_lg": [50, 55, 10, 35],
 
             "aspectRatio_sm" : [1,1.6],
             "aspectRatio_md" : [1.5,1],
-            "aspectRatio_lg" : [1.5,1],
+            "aspectRatio_lg" : [1.5,0.8],
 
             "mobileBreakpoint" : 610,
 

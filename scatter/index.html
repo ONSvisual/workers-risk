@@ -71,10 +71,29 @@
           stroke-width:20px;
         }
 
+        .labeltext {
+          color: #323321;
+
+        }
+
+        /* .annotation-close {
+          cursor:pointer;
+        } */
 
         .annotation-note-bg {
           /* fill: fuchsia !important;
           fill-opacity: 0.5 !important; */
+        }
+
+        .footer {
+          font-size: 16px;
+          font-weight: 700;
+          color: #323123;
+        }
+
+        .footer a {
+          text-decoration: none;
+          color: #323123 !important;
         }
 
         @media (max-width: 500px) {
@@ -92,9 +111,9 @@
             position: absolute;
             background: white;
             top: 65px;
-            width: 280px;
+            width: 400px;
             height: 45px;
-            left: 40px;
+            left: 50px;
             border: none;
             z-index:2;
           }
@@ -265,8 +284,6 @@ function drawGraphic(){
                           })
       }
 
-      console.log(maxR)
-
       var ratio =  height / chart_width;
 
        x = d3.scaleLinear()
@@ -288,30 +305,44 @@ function drawGraphic(){
 
 
       var xAxis = d3.axisBottom(x),
-          yAxis = d3.axisLeft(y);
+          yAxis = d3.axisRight(y);
+
+      ylabels = ["Never","Yearly","Monthly","Weekly","Daily"];
+
+      xlabels = ["Not near people","Not closely","Slightly close","Arm's length","Touching"];
 
     //specify number or ticks on y axis
   	if (parseInt(graphic.style("width") ) <= threshold_sm) {
   		yAxis.ticks(dvc.optional.y_num_ticks_sm_md_lg[0])
             .tickValues([0,25,50,75,100])
+            .tickFormat(function(d,i){ return ylabels[i]})
   	 } else if (parseInt(graphic.style("width") ) <= threshold_md){
   		yAxis.ticks(dvc.optional.y_num_ticks_sm_md_lg[1])
             .tickValues([0,25,50,75,100])
+            .tickFormat(function(d,i){ return ylabels[i]})
+
   	 } else {
   		yAxis.ticks(dvc.optional.y_num_ticks_sm_md_lg[2])
             .tickValues([0,25,50,75,100])
+            .tickFormat(function(d,i){ return ylabels[i]})
+
   	 }
 
      //specify number or ticks on y axis
     if (parseInt(graphic.style("width") ) <= threshold_sm) {
       xAxis.ticks(dvc.optional.x_num_ticks_sm_md_lg[0])
             .tickValues([0,25,50,75,100])
+            .tickFormat(function(d,i){ return xlabels[i]})
      } else if (parseInt(graphic.style("width") ) <= threshold_md){
       xAxis.ticks(dvc.optional.x_num_ticks_sm_md_lg[1])
             .tickValues([0,25,50,75,100])
+            .tickFormat(function(d,i){ return xlabels[i]})
+
      } else {
       xAxis.ticks(dvc.optional.x_num_ticks_sm_md_lg[2])
           .tickValues([0,25,50,75,100])
+          .tickFormat(function(d,i){ return xlabels[i]})
+
      }
 
 
@@ -320,25 +351,30 @@ function drawGraphic(){
          .attr('transform', 'translate(0, ' + height + ')')
          .call(xAxis.tickSize(-height, 0, 0))
          .append('text')
-           .attr('x', chart_width)
+           .attr('x', chart_width/2)
            .attr('dy', '2.5em')
-           .attr('text-anchor', 'end')
+           .attr('text-anchor', 'middle')
            .attr('fill', 'rgb(54, 54, 54)')
            .attr('font-size', '1.2em')
+           .attr("font-weight","bold")
            .text(function(d,i){return dvc.essential.xAxisLabel});
 
       g.append('g')
          .attr('class', 'y-axis grid axis')
-         .call(yAxis.tickSize(-chart_width, 0, 0))
+         .call(yAxis.tickSize(chart_width, 0 , chart_width))
          .append('text')
              .attr('y', -15)
-             .attr("x", -20)
+             .attr("x", chart_width + margin.right - 5)
              // .attr('dy', '-2em')
              // .attr('dx','-3em')
-             .attr('text-anchor', 'start')
+             .attr('text-anchor', 'end')
              .attr('fill', 'rgb(54, 54, 54)')
              .attr('font-size', '1.2em')
+             .attr("font-weight","bold")
              .text(function(d,i){return dvc.essential.yAxisLabel})
+
+      d3.selectAll(".x-axis text").attr("y","10")
+      d3.selectAll(".y-axis text").attr("transform","translate(5,0)")
 
       g.append('defs')
          .append('clipPath')
@@ -391,28 +427,6 @@ function drawGraphic(){
                 .attr('stroke',"#b4b4b4")
                 .attr("stroke-width","1px")
           }
-          // draw convex hulls
-          // for(j=0; j<dvc.essential.fills.length; j++){
-          //
-          //
-          //   vertices[j] = [];
-          //
-          //   filtered =graphic_data.filter(function(d){return d.group == 'grp' + (j+1);})
-          //
-          //   for(i=0; i<filtered.length; i++) {
-          //     vertices[j].push([x(filtered[i][dvc.essential.pickxdata]),y(filtered[i][dvc.essential.pickydata])])
-          //   }
-          //
-          //   hullVertices[j] = d3.polygonHull(vertices[j])
-          //
-          //   hulls.append("path")
-          //     .attr("class","hull")
-          //     .attr("fill",dvc.essential.fills[j])
-          //     .attr("stroke",dvc.essential.fills[j])
-          //     .datum(hullVertices[j])
-          //     .attr("d", function(d) { return "M" + d.join("L") + "Z"; });
-          // }
-
 
 
           //create link to source
@@ -448,17 +462,22 @@ function drawGraphic(){
                     .text(d.text)
                     .call(wrap,dvc.essential.textAnnotationWrap);
 
-                      console.log(d)
-                    //d3.selectAll("#c" + d.soc).classed("highlightedCircle",true).raise();
-
-
                   })
 
 //d3-annotations tooltips(from https://bl.ocks.org/Fil/17fc857c3ce36bf8e21ddefab8bc9af4/167bce6e2b706016004a3baf14f838203646a27a)
 
       // create a container for tooltips
-      tipg = svg.append("g")
-        .attr("class", "annotation-tip");
+      tipg = d3.select('#graphic').append('svg')
+                  .style("position","absolute")
+                  .style("left","0px")
+                  .style("right","0px")
+                  .style("pointer-events","none")
+                  .attr("id","tooltippin")
+                  .attr('width', chart_width + margin.left + margin.right)
+                  .attr('height', height + margin.top + margin.bottom +50)
+                  .append("g")
+                  .attr("class", "annotation-tip")
+                  .style("pointer-events","all")
 
 
       // this function will call d3.annotation when a tooltip has to be drawn
@@ -478,8 +497,8 @@ function drawGraphic(){
                  align: "middle",
                  title: graphic_data[d.index].name || "??",
                  bgPadding: borders,
-                 label: "Exposure to disease"+": "+d3.format('.1f')(d.data[1])+" "+ ",Physical proximity" +": "+d3.format('.1f')(d.data[0]),
-                 wrapSplitter: /,/,
+                 label: "Exposure to disease"+": "+d3.format('.1f')(d.data[1])+" "+ "'Physical proximity" +": "+d3.format('.1f')(d.data[0]),
+                 wrapSplitter: /'/,
                  wrap:dvc.essential.d3AnnotationWrap
               }//,
               // subject: {
@@ -520,8 +539,6 @@ function drawGraphic(){
               })
 
           }
-
-
 
           d3.select(".connector").attr("stroke","#236092")
         } //end tip()
@@ -564,8 +581,6 @@ function drawGraphic(){
 
           function hover() {
 
-            console.log(overcircle)
-
               if(overcircle == false) {
 
 
@@ -580,15 +595,12 @@ function drawGraphic(){
                 // closest to the mouse, limited by max distance voronoiRadius
                 var site = voronoi.find(mx, my, voronoiRadius);
 
-                //console.log(splited = str.split(" ");)
-
                 classString = d3.select(".index" + site.index).attr("class");
 
                 splitString = classString.split(" ");
                 d3.selectAll(".circles").classed("focusCircle",false);
                 d3.selectAll("." + splitString[2]).classed("focusCircle",true)//.raise();
                 code = d3.select(".index" + site.index).attr("id")
-                //console.log(code)
                 $("#varselect").val(code);
 
 
@@ -612,8 +624,6 @@ function drawGraphic(){
 
                 splitString = classString.split(" ");
 
-                console.log(splitString)
-
                 indexString = splitString[3].split("index");
 
                 myObj = {}
@@ -626,7 +636,6 @@ function drawGraphic(){
                 myObj['data'] = [xVal,yVal];
                 myObj['index'] = indexString[1]
 
-                console.log(myObj)
                 tip(myObj)
 
 
@@ -754,8 +763,6 @@ function drawGraphic(){
 
       function selectCircle() {
 
-        console.log("selectCircle")
-
         selocc = d3.select("#varselect").node().value;
         window.location.hash = selocc;
 
@@ -773,8 +780,6 @@ function drawGraphic(){
 
         splitString = classString.split(" ");
 
-        console.log(splitString)
-
         indexString = splitString[3].split("index");
 
         myObj = {}
@@ -787,7 +792,6 @@ function drawGraphic(){
         myObj['data'] = [xVal,yVal];
         myObj['index'] = indexString[1]
 
-        console.log(myObj)
         tip(myObj)
 
       } //end selectCircle
@@ -797,13 +801,25 @@ function drawGraphic(){
      urlLocal = window.location.href;
 
      var listnamesLocal = urlLocal.split("#")[1];
-    //console.log(urlLocal)
+
      if(listnamesLocal != undefined) {
 
        listnamesA = listnamesLocal.split(',').slice(0).join(',');
 
-       listnames = 	listnamesA.split(',');
-      // console.log(listnames)
+
+      listnamesAll = listnamesA.split(',');
+
+      listnames = [];
+      listnameshow = [];
+
+      listnamesAll.forEach(function(d,i) {
+         if(i % 2 === 0) {
+           listnames.push(d);
+         } else {
+           listnameshow.push(d);
+         }
+       })
+
 
       if(listnames.length == 1){
             d3.selectAll(".circles").classed("focusCircle",false);
@@ -841,26 +857,34 @@ function drawGraphic(){
         d3.selectAll(".circles").classed("focusCircle",false);
 
         listnames.forEach(function(d,i) {
-          d3.selectAll("#" + listnames[i]).classed("highlightedCircle",true)//.raise();
+          d3.selectAll("#" + listnames[i]).classed("highlightedCircle",true).raise();
 
           //get the name of the occupation based on the code
           namex = graphic_data.filter(function(data,i){return d == "c" + data.uk_2010_soc_code})
 
-          //add in a label (but don't place it yet)
-          currlabel = d3.select("#graphic")
-              .append("p")
-              .attr("id","labeltext" + i)
-              .style("position","absolute")
-              .style("text-align","center")
-              .style("width","100px")
-              .text(namex[0].name);
 
-          //works out the label height so you know how much to offset the label
+          //add a label if set through URL
+          if(listnameshow[i] != 0) {
 
-          labelheight = parseInt(currlabel.style("height"));
+            //add in a label (but don't place it yet)
+            currlabel = d3.select("#graphic")
+                .insert("p","#tooltippin")
+                .attr("class","labeltext")
+                .attr("id","labeltext" + i)
+                .style("position","absolute")
+                .style("text-align","center")
+                .style("width","100px")
+                .text(namex[0].name);
 
-          currlabel.style("left",x(namex[0].proximity) + margin.left - 50 + "px")
-                   .style("top",y(namex[0].exposure)  + margin.top - labelheight - r(Math.sqrt(namex[0].in_employment/Math.PI) ) + "px")
+            //works out the label height so you know how much to offset the label
+
+            labelheight = parseInt(currlabel.style("height"));
+
+            currlabel.style("left",x(namex[0].proximity) + margin.left - 50 + "px")
+                     .style("top",y(namex[0].exposure)  + margin.top - 5 - labelheight - r(Math.sqrt(namex[0].in_employment/Math.PI) ) + "px")
+
+
+          }
 
 
         });
