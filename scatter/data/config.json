@@ -43,9 +43,9 @@
 
 	},
     "optional" : {
-            "margin_sm": [50 ,20, 10, 35],
-            "margin_md": [50, 20, 10, 35],
-            "margin_lg": [50, 55, 10, 35],
+            "margin_sm": [50 ,55, 10, 18],
+            "margin_md": [50, 55, 10, 18],
+            "margin_lg": [50, 55, 10, 18],
 
             "aspectRatio_sm" : [1,1.6],
             "aspectRatio_md" : [1.5,1],

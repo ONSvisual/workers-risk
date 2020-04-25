@@ -109,7 +109,7 @@
         #graphic .axis path  /* required */
 		{
             fill: none;
-            stroke: #ccc;
+            stroke: none;
             shape-rendering: crispEdges;
         }
 

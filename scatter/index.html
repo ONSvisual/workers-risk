@@ -129,6 +129,7 @@
 <div id="graphic"><img src="fallback.png" alt="[Chart]" /></div>
 
 
+
 <div class="footer"> <div id="footer"></div></div>
 </body>
   <script src="https://d3js.org/d3.v4.min.js" type="text/javascript"></script>
@@ -226,6 +227,22 @@ function drawGraphic(){
         .attr("id","svgg")
         .attr('transform', 'translate(' + margin.left + ', ' + margin.top + ')')
         .attr('overflow', 'hidden');
+
+      //set up dropshadow
+
+      svg.append("filter")
+          .attr("id","shadow")
+          .attr("x","0")
+          .attr("y","0")
+          .attr("width","200%")
+          .attr("height","200%")
+          .append("feDropShadow")
+          .attr("dx","2")
+          .attr("dy","2")
+          .attr("stdDeviation","4")
+          .attr("flood-color","#cccccc")
+          .attr("flood-opacity","1");
+
 
       if(dvc.essential.AxisScale == "auto_min_max"){
       var minX = d3.min(d3.entries(dots), function(c) {
@@ -350,12 +367,13 @@ function drawGraphic(){
          .attr('class', 'x-axis grid axis')
          .attr('transform', 'translate(0, ' + height + ')')
          .call(xAxis.tickSize(-height, 0, 0))
-         .append('text')
+
+      g.append('text')
            .attr('x', chart_width/2)
-           .attr('dy', '2.5em')
+           .attr('y', height + margin.bottom + 40)
            .attr('text-anchor', 'middle')
            .attr('fill', 'rgb(54, 54, 54)')
-           .attr('font-size', '1.2em')
+           .attr('font-size', '16px')
            .attr("font-weight","bold")
            .text(function(d,i){return dvc.essential.xAxisLabel});
 
@@ -369,11 +387,11 @@ function drawGraphic(){
              // .attr('dx','-3em')
              .attr('text-anchor', 'end')
              .attr('fill', 'rgb(54, 54, 54)')
-             .attr('font-size', '1.2em')
+             .attr('font-size', '16px')
              .attr("font-weight","bold")
              .text(function(d,i){return dvc.essential.yAxisLabel})
 
-      d3.selectAll(".x-axis text").attr("y","10")
+      d3.selectAll(".x-axis text").attr("x","0").attr("transform","translate(0,3)").call(wrap, 20);
       d3.selectAll(".y-axis text").attr("transform","translate(5,0)")
 
       g.append('defs')
@@ -411,6 +429,7 @@ function drawGraphic(){
             .attr('r', function(d) { return  r(Math.sqrt(d.in_employment/Math.PI) ); })
           //  .attr('fill', function(d) { return y(d[dvc.essential.pickydata]); })
           //  .attr('stroke', "red")
+            .attr("data-num",function(d){return d.in_employment})
             .attr("opacity", 0.6)
             .attr('stroke-width', 1)
             .on("mouseout", function(){overcircle = false})
@@ -497,7 +516,7 @@ function drawGraphic(){
                  align: "middle",
                  title: graphic_data[d.index].name || "??",
                  bgPadding: borders,
-                 label: "Exposure to disease"+": "+d3.format('.1f')(d.data[1])+" "+ "'Physical proximity" +": "+d3.format('.1f')(d.data[0]),
+                 label: "Number of workers"+": "+d3.format(',.0f')(numemploy)+"'Exposure to disease"+": "+d3.format('.1f')(d.data[1])+" "+ "'Physical proximity" +": "+d3.format('.1f')(d.data[0]),
                  wrapSplitter: /'/,
                  wrap:dvc.essential.d3AnnotationWrap
               }//,
@@ -513,7 +532,7 @@ function drawGraphic(){
           tipg.call(annotationtip);
 
 
-          d3.select("rect.annotation-note-bg").attr("fill","#fff").attr("fill-opacity",1).attr("opacity",1)//.attr("rx",5).attr("ry",5).attr("stroke","#fff").attr("stroke-width","10px");
+          d3.select("rect.annotation-note-bg").attr("fill","#fff").attr("fill-opacity",1).attr("opacity",1).style("filter","url(#shadow)")//.attr("rx",5).attr("ry",5).attr("stroke","#fff").attr("stroke-width","10px");
           d3.select(".annotation-note-label").attr("fill","#236092");
           d3.select(".annotation-note-title").attr("fill","#236092").style("font-weight","bold").style("font-family","Open Sans");
 
@@ -595,6 +614,7 @@ function drawGraphic(){
                 // closest to the mouse, limited by max distance voronoiRadius
                 var site = voronoi.find(mx, my, voronoiRadius);
 
+
                 classString = d3.select(".index" + site.index).attr("class");
 
                 splitString = classString.split(" ");
@@ -603,6 +623,7 @@ function drawGraphic(){
                 code = d3.select(".index" + site.index).attr("id")
                 $("#varselect").val(code);
 
+                numemploy = d3.selectAll("." + splitString[2]).attr("data-num");
 
                 tip(site);//tooltip stuff
                 var xpos = site[0];
@@ -619,6 +640,7 @@ function drawGraphic(){
 
                 xpos = d3.selectAll("#" + selocc).attr("cx");
                 ypos = d3.selectAll("#" + selocc).attr("cy");
+                numemploy = d3.selectAll("#" + selocc).attr("data-num");
 
                 classString = d3.select("#" + selocc).attr("class");
 
@@ -634,7 +656,9 @@ function drawGraphic(){
                 xVal = x.invert(xpos);
                 yVal =y.invert(ypos);
                 myObj['data'] = [xVal,yVal];
-                myObj['index'] = indexString[1]
+                myObj['index'] = indexString[1];
+
+                $("#varselect").val(selocc);
 
                 tip(myObj)
 
@@ -775,6 +799,7 @@ function drawGraphic(){
 
         xpos = d3.selectAll("#" + selocc).attr("cx");
         ypos = d3.selectAll("#" + selocc).attr("cy");
+        numemploy = d3.selectAll("#" + selocc).attr("data-num");
 
         classString = d3.select("#" + selocc).attr("class");
 
@@ -796,6 +821,10 @@ function drawGraphic(){
 
       } //end selectCircle
     }//end drawSelect
+
+
+
+
     function checkUrl() {
 
      urlLocal = window.location.href;
@@ -833,6 +862,8 @@ function drawGraphic(){
 
             xpos = d3.selectAll("#" + listnames[0]).attr("cx");
             ypos = d3.selectAll("#" + listnames[0]).attr("cy");
+            numemploy = d3.selectAll("#" + listnames[0]).attr("data-num");
+
 
             classString = d3.select("#" + listnames[0]).attr("class");
 
