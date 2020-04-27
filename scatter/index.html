@@ -168,17 +168,19 @@ function drawGraphic(){
       var margin = {top: dvc.optional.margin_sm[0], right: dvc.optional.margin_sm[1], bottom: dvc.optional.margin_sm[2], left: dvc.optional.margin_sm[3]};
       var chart_width = parseInt(graphic.style("width") ) - margin.left - margin.right;
       var height = Math.ceil((chart_width * dvc.optional.aspectRatio_sm[1]) / dvc.optional.aspectRatio_sm[0]);
+      var scaleR = 15;
   } else if (parseInt(graphic.style("width"))  < threshold_md) {
       // set medium size margins, height and width
       var margin = {top: dvc.optional.margin_md[0], right: dvc.optional.margin_md[1], bottom: dvc.optional.margin_md[2], left: dvc.optional.margin_md[3]};
       var chart_width = parseInt(graphic.style("width") ) - margin.left - margin.right;
       var height = Math.ceil((chart_width * dvc.optional.aspectRatio_md[1]) / dvc.optional.aspectRatio_md[0]);
+      var scaleR = 20;
   } else {
       // set large size margins, height and width
       var margin = {top: dvc.optional.margin_lg[0], right: dvc.optional.margin_lg[1], bottom: dvc.optional.margin_lg[2], left: dvc.optional.margin_lg[3]}
       var chart_width = parseInt(graphic.style("width") ) - margin.left - margin.right;
       var height = Math.ceil((chart_width * dvc.optional.aspectRatio_lg[1]) / dvc.optional.aspectRatio_lg[0]);
-
+      var scaleR = 30;
   } // end else ...
 
   // clear out existing graphics
@@ -312,7 +314,7 @@ function drawGraphic(){
                      .domain([minY, maxY]);
 
        r = d3.scaleLinear()
-                     .range([0, 30])
+                     .range([0, scaleR])
                      .domain([minR, maxR]);
 
 
