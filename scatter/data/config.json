@@ -51,7 +51,7 @@
             "aspectRatio_md" : [1.5,1],
             "aspectRatio_lg" : [1.5,0.8],
 
-            "mobileBreakpoint" : 610,
+            "mobileBreakpoint" : 500,
 
             "x_num_ticks_sm_md_lg" : [4,4,4],
             "y_num_ticks_sm_md_lg" : [4,4,4],

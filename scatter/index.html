@@ -888,6 +888,11 @@ function drawGraphic(){
       } else {
 
         d3.selectAll(".circles").classed("focusCircle",false);
+        //
+        // d3.select("#graphic")
+        //     .append("div")
+        //     .attr("position","absolute")
+        //
 
         listnames.forEach(function(d,i) {
           d3.selectAll("#" + listnames[i]).classed("highlightedCircle",true).raise();
@@ -914,8 +919,14 @@ function drawGraphic(){
 
             labelheight = parseInt(currlabel.style("height"));
 
+            if(parseInt(graphic.style("width")) < threshold_sm) {
+              topmarg = 45;
+            } else {
+              topmarg = 0;
+            }
+
             currlabel.style("left",x(namex[0].proximity) + margin.left - 50 + "px")
-                     .style("top",y(namex[0].exposure)  + margin.top - 5 - labelheight - r(Math.sqrt(namex[0].in_employment/Math.PI) ) + "px")
+                     .style("top",y(namex[0].exposure)  + topmarg + margin.top - 5 - labelheight - r(Math.sqrt(namex[0].in_employment/Math.PI) ) + "px")
 
 
           }
