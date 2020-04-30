@@ -12,6 +12,8 @@
   <meta http-equiv="content-type" content="text/html; charset=utf-8" />
   <link rel="stylesheet" href="../lib/globalStyle.css" />
   <link href='../lib/global.css' rel='stylesheet'/>
+  <link rel="stylesheet" href="../lib/styles.css" media="screen">
+
 
 
   <style>
@@ -76,9 +78,10 @@
 
         }
 
-        /* .annotation-close {
-          cursor:pointer;
-        } */
+        #annotation-close {
+          pointer-events: all;
+          cursor: pointer;
+        }
 
         .annotation-note-bg {
           /* fill: fuchsia !important;
@@ -97,6 +100,12 @@
         }
 
         @media (max-width: 500px) {
+
+
+            .legendstuff {
+              display: none;
+            }
+
           .select {
             position: relative;
             background: white;
@@ -104,20 +113,54 @@
             border: none;
             z-index:2;
           }
+
+          .infopanel {
+            position: relative;
+            background: white;
+            height: 0px;
+            border: none;
+            z-index:2;
+            padding-left: 10px;
+            padding-top: 10px;
+            font-size: 16px;
+            line-height: 1;
+          }
         }
 
         @media (min-width: 501px) {
+
           .select {
             position: absolute;
             background: white;
-            top: 65px;
+            top: 128px;
             width: 400px;
             height: 45px;
-            left: 50px;
+            left: 36px;
             border: none;
             z-index:2;
           }
+          .infopanel {
+            display:none;
+          }
 
+        }
+
+        .tabnum {
+          font-weight:bold;
+          text-align: right;
+        }
+
+        td {
+          padding: 5px 0px;
+          border-bottom:1pt dotted #ccc;
+        }
+
+        .lastrow {
+          border-bottom:none;
+        }
+
+        .popover {
+          pointer-events: none;
         }
 
     </style>
@@ -126,6 +169,7 @@
 <div class="select">
   <select id="varselect"></select>
 </div>
+<div class="infopanel"></div>
 <div id="graphic"><img src="fallback.png" alt="[Chart]" /></div>
 
 
@@ -133,11 +177,13 @@
 <div class="footer"> <div id="footer"></div></div>
 </body>
   <script src="https://d3js.org/d3.v4.min.js" type="text/javascript"></script>
-  <script src="../lib/d3-annotation.js" type="text/javascript"></script>
+  <script src="../lib/d3-annotation1.js" type="text/javascript"></script>
   <script src="../lib/modernizr.svg.min.js" type="text/javascript"></script>
   <script src="../lib/jquery.js" type="text/javascript"></script>
   <script src="../lib/bootstrap.min.js" type="text/javascript"></script>
-  <script src="../lib/pym.js" charset="utf-8" type="text/javascript"></script>
+  <script src="https://cdn.ons.gov.uk/vendor/pym/1.3.2/pym.v1-3-2.min.js"></script>
+  <script src="../lib/bootstrap.min.js"></script>
+
   <!-- <script src="../lib/saveSvgAsPng.js" type="text/javascript"></script>
   <script src="../lib/footer.js" type="text/javascript"></script> -->
   <script>
@@ -372,7 +418,7 @@ function drawGraphic(){
 
       g.append('text')
            .attr('x', chart_width/2)
-           .attr('y', height + margin.bottom + 40)
+           .attr('y', height + margin.bottom + 35)
            .attr('text-anchor', 'middle')
            .attr('fill', 'rgb(54, 54, 54)')
            .attr('font-size', '16px')
@@ -429,14 +475,15 @@ function drawGraphic(){
             .attr( "cx" , function(d) { return x(d[dvc.essential.pickxdata]); })
     				.attr( "cy" , function(d) { return y(d[dvc.essential.pickydata]); })
             .attr('r', function(d) { return  r(Math.sqrt(d.in_employment/Math.PI) ); })
-          //  .attr('fill', function(d) { return y(d[dvc.essential.pickydata]); })
-          //  .attr('stroke', "red")
             .attr("data-num",function(d){return d.in_employment})
+            // .attr("data-fem",function(d){return d.fempcent})
+            // .attr("data-bame",function(d){return d.bamepcent})
+            // .attr("data-earn",function(d){return d.earnings})
+            // .attr("data-fifty",function(d){return d.fiftyfivepcent})
             .attr("opacity", 0.6)
             .attr('stroke-width', 1)
-            .on("mouseout", function(){overcircle = false})
-            .on("mouseover",function(d,i){overcircle = true; circlesel=d.uk_2010_soc_code; hover()})
-          //  .attr('class', 'circles');
+            .on("mouseout", function(){overcircle = false;})
+            .on("mouseover",function(d,i){overcircle = true; circlesel=d.uk_2010_soc_code;hover();})
 
 
             vertices = [];
@@ -448,6 +495,61 @@ function drawGraphic(){
                 .attr('stroke',"#b4b4b4")
                 .attr("stroke-width","1px")
           }
+
+
+          //create legend
+          main.append("circle")
+              .attr("class","legendstuff")
+              .attr( "cx" , x(10))
+              .attr( "cy" , y(66))
+              .attr('r', r(Math.sqrt(100000/Math.PI)))
+              .attr('stroke-width', "1px")
+              .attr("stroke","#333")
+              //.attr("stroke-dasharray","1 1")
+              .attr("fill","none")
+
+
+          main.append("circle")
+              .attr("class","legendstuff")
+              .attr( "cx" , x(10))
+              .attr( "cy" , y(70))
+              .attr('r', r(Math.sqrt(1000000/Math.PI)))
+              .attr('stroke-width', "1px")
+              .attr("stroke","#333")
+              //.attr("stroke-dasharray","1 1")
+              .attr("fill","none")
+
+          main.append("line")
+              .attr("class","legendstuff")
+              .attr( "x1" , x(10))
+              .attr( "x2" , x(15))
+              .attr( "y1" , y(76.3))
+              .attr( "y2" , y(76.3))
+              .attr('stroke-width', "1px")
+              .attr("stroke","#333")
+              .attr("stroke-dasharray","1 1")
+
+          main.append("line")
+              .attr("class","legendstuff")
+              .attr( "x1" , x(10))
+              .attr( "x2" , x(15))
+              .attr( "y1" , y(67.8))
+              .attr( "y2" , y(67.8))
+              .attr('stroke-width', "1px")
+              .attr("stroke","#333")
+              .attr("stroke-dasharray","1 1")
+
+          main.append("text")
+              .attr("class","legendstuff")
+              .text("1,000,000 workers")
+              .attr("x" , x(16))
+              .attr("y" , y(75.4))
+
+          main.append("text")
+              .attr("class","legendstuff")
+              .text("100,000 workers")
+              .attr("x" , x(16))
+              .attr("y" , y(66.7))
 
 
           //create link to source
@@ -501,68 +603,108 @@ function drawGraphic(){
                   .style("pointer-events","all")
 
 
-      // this function will call d3.annotation when a tooltip has to be drawn
-        function tip (d) {
 
-          annotationtip = d3.annotation()
-          .type(d3.annotationLabel)
-          .notePadding(notePadding)
-          .annotations([d].map( d =>  {
-            return {
-              data: {x:d.data[0],y:d.data[1]},
-              className: "show-bg",
-              dx: (d[0] > chart_width/2) ? -50 : 70,
-              dy: (d[1] > height/2) ? -30 : 30,
-
-              note: {
-                 align: "middle",
-                 title: graphic_data[d.index].name || "??",
-                 bgPadding: borders,
-                 label: "Number of workers"+": "+d3.format(',.0f')(numemploy)+"'Exposure to disease"+": "+d3.format('.1f')(d.data[1])+" "+ "'Physical proximity" +": "+d3.format('.1f')(d.data[0]),
-                 wrapSplitter: /'/,
-                 wrap:dvc.essential.d3AnnotationWrap
-              }//,
-              // subject: {
-              //   radius: 4,
-              //   radiusPadding: 0,
-              // },
-
-            };
-          }))
-          .accessors({ x: d => x(d.x)+margin.left, y: d => y(d.y)+margin.top})
-
-          tipg.call(annotationtip);
+        function tipmob (d) {
 
 
-          d3.select("rect.annotation-note-bg").attr("fill","#fff").attr("fill-opacity",1).attr("opacity",1).style("filter","url(#shadow)")//.attr("rx",5).attr("ry",5).attr("stroke","#fff").attr("stroke-width","10px");
-          d3.select(".annotation-note-label").attr("fill","#236092");
-          d3.select(".annotation-note-title").attr("fill","#236092").style("font-weight","bold").style("font-family","Open Sans");
+        divinfo = d3.select(".infopanel")
+
+        //[["Number of workers: "],[],[],[],[]]
+        divinfo.selectAll("*").remove();
+
+        divinfotable = divinfo.append("table");
+
+        first = divinfotable.append("tr");
+        first.append("td").text("Number of workers")
+        first.append("td").style("text-align","right").style("font-weight","bold").text(d3.format(',.0f')(numemploy))
+
+        // second = divinfotable.append("tr");
+        // second.append("td").text("Annual earnings")
+        // second.append("td").style("text-align","right").style("font-weight","bold").text("£" + d3.format(',.0f')(earnings))
+        //
+        //
+        // third = divinfotable.append("tr");
+        // third.append("td").text("Female");
+        // third.append("td").style("text-align","right").style("font-weight","bold").text(d3.format('.1f')(perfemale) + "%")
+        //
+        //
+        // fourth = divinfotable.append("tr");
+        // fourth.append("td").text("Aged 55+");
+        // fourth.append("td").style("text-align","right").style("font-weight","bold").text(d3.format('.1f')(per55) + "%");
+        //
+        //
+        // fifth = divinfotable.append("tr");
+        // fifth.append("td").attr("class","lastrow").text("% Black, Asian and minority ethnic")
+        // fifth.append("td").attr("class","lastrow").style("text-align","right").style("font-weight","bold").text(d3.format('.1f')(perbame) + "%");
+
+        divinfo.style("height","auto");
+
+        heightInfo = divinfo.node().getBoundingClientRect().height;
+
+        d3.selectAll(".labeltext").each(function(d,i){
+
+          topmarg = d3.select(this).style("top")
+
+          topmarg = heightInfo + parseInt(topmarg);
+
+          d3.select(this).style("top",topmarg + "px");
+
+        });
+
+        pymChild.sendHeight();
 
           if(selectchange == true) {
 
-            d3.select("#annotation-close").remove();
-
-            xclose = d3.select("rect.annotation-note-bg").attr("width");
-
-            d3.select(".annotation-note-content")
-              .append("svg:image")
-              .attr('x', xclose - 40)
-              .attr('y', -27)
-              .attr('width', 16)
-              .attr('height', 16)
-              .attr("id","annotation-close")
-              .attr("xlink:href", "../lib/closeblue.svg")
-              .on("click",function() {
-                  tipg.selectAll("g").remove();
-                  d3.selectAll(".circles").classed("focusCircle",false).style("pointer-events","all");;
-                  d3.select(".overlay1").style("pointer-events","all");
-                  d3.select(".placeholder").property("selected",true)
-              })
-
           }
 
-          d3.select(".connector").attr("stroke","#236092")
         } //end tip()
+
+
+        function showTooltip(d, sel) {
+
+            var element = sel;
+
+            if(d.data[0] > 71) {
+              placement = "left";
+            } else {
+              placement = "top";
+            }
+
+                $(element).popover({
+                    title: function() {if(selectchange == true) {
+                        return  "<img id='annotation-close' src='../lib/closeblue.svg' style='float: right; height:16px; width:16px;'></img>" + "<div style='font-size: 16px;'><b>" + graphic_data[d.index].name + "</b>"}
+                      else {
+                        return "<div style='font-size: 16px;'><b>" + graphic_data[d.index].name + "</b>";
+                    }} ,
+                    placement: placement,
+                    container: '#graphic',
+                    id:"toolTip",
+                    trigger: 'manual',
+                    html : true,
+                    content: function() {
+                        return "<table>" +
+                          "<tr><td>Number of employees<td><td class='tabnum'>" + d3.format(',.0f')(numemploy)  + "</td><tr>" +
+                          // "<tr><td>Annual earnings<td><td class='tabnum'>£" + d3.format(',.0f')(earnings)  + "</td><tr>" +
+                          // "<tr><td>Female<td><td class='tabnum'>" + d3.format('.1f')(perfemale)  + "%</td><tr>" +
+                          // "<tr><td>Aged 55+<td><td class='tabnum'>" + d3.format('.1f')(per55)  + "%</td><tr>" +
+                          // "<tr><td class='lastrow'>Black, Asian and minority ethnic<td><td class='lastrow tabnum'>" + d3.format('.1f')(perbame) + "%</td><tr>" +
+                          "</table>"
+
+                    }
+
+                });
+                $(element).popover('show');
+
+
+                d3.select("#annotation-close")
+                  .on("click",function() {
+                      $('.popover').each(function() { $(this).remove(); });
+                      d3.selectAll(".circles").classed("focusCircle",false).style("pointer-events","all");;
+                      d3.select(".overlay1").style("pointer-events","all");
+                      d3.select(".placeholder").property("selected",true)
+                })
+
+        }//end function showTooltip
 
       //voronoi
 
@@ -597,96 +739,126 @@ function drawGraphic(){
           .attr('width', chart_width)
           .attr('height', height)
           .on('click', hover)
-          .on('mouseout', function() {tipg.selectAll("g").remove(); d3.selectAll(".circles").classed("focusCircle",false); $("#varselect").val("placeholder");})
+          .on('mouseout', function() {d3.selectAll(".circles").classed("focusCircle",false); $("#varselect").val("placeholder");})
           .on('mousemove', hover)
 
-          function hover() {
-
-              if(overcircle == false) {
-
-
-                selectchange = false;
-                borders = {top:15, left:15, bottom:15, right:15};
-                notePadding = 15;
-
-                var [mx, my] = d3.mouse(this);
-
-
-                // use the new diagram.find() function to find the Voronoi site
-                // closest to the mouse, limited by max distance voronoiRadius
-                var site = voronoi.find(mx, my, voronoiRadius);
-
-
-                classString = d3.select(".index" + site.index).attr("class");
-
-                splitString = classString.split(" ");
-                d3.selectAll(".circles").classed("focusCircle",false);
-                d3.selectAll("." + splitString[2]).classed("focusCircle",true)//.raise();
-                code = d3.select(".index" + site.index).attr("id")
-                $("#varselect").val(code);
-
-                numemploy = d3.selectAll("." + splitString[2]).attr("data-num");
-
-                tip(site);//tooltip stuff
-                var xpos = site[0];
-                var ypos = site[1];
-
-
-
-              } else {
-
-                selocc = d3.select("#c" + circlesel).attr("id");
-
-                d3.selectAll(".circles").classed("focusCircle",false);
-                d3.selectAll("#" + selocc).classed("focusCircle",true)//.raise();
-
-                xpos = d3.selectAll("#" + selocc).attr("cx");
-                ypos = d3.selectAll("#" + selocc).attr("cy");
-                numemploy = d3.selectAll("#" + selocc).attr("data-num");
-
-                classString = d3.select("#" + selocc).attr("class");
-
-                splitString = classString.split(" ");
-
-                indexString = splitString[3].split("index");
-
-                myObj = {}
-
-                myObj[0] = xpos;
-                myObj[1] = ypos;
-
-                xVal = x.invert(xpos);
-                yVal =y.invert(ypos);
-                myObj['data'] = [xVal,yVal];
-                myObj['index'] = indexString[1];
-
-                $("#varselect").val(selocc);
-
-                tip(myObj)
-
-
-
-              }
-
-
-
-              // focus.select('#focusCircle')
-              //     .attr('cx', xpos)
-              //     .attr('cy', ypos);
-              // focus.select('#focusLineX')
-              //     .attr('x1', xpos).attr('y1', y(y.domain()[0]))
-              //     .attr('x2', xpos).attr('y2', ypos);
-              // focus.select('#focusLineY')
-              //     .attr('x1', x(x.domain()[0])).attr('y1', ypos)
-              //     .attr('x2', xpos).attr('y2', ypos);
-
-
-
-
-          }
 
 }//end if wider than mobileBreakpoint then do stuff
 
+function hover() {
+
+  $('.popover').each(function() { $(this).remove(); });
+
+    if(overcircle == false) {
+
+
+      selectchange = false;
+      borders = {top:15, left:15, bottom:15, right:15};
+      notePadding = 15;
+
+      var [mx, my] = d3.mouse(this);
+
+
+      // use the new diagram.find() function to find the Voronoi site
+      // closest to the mouse, limited by max distance voronoiRadius
+      var site = voronoi.find(mx, my, voronoiRadius);
+
+
+      classString = d3.select(".index" + site.index).attr("class");
+
+
+      splitString = classString.split(" ");
+      d3.selectAll(".circles").classed("focusCircle",false);
+
+      circleSel = d3.selectAll("." + splitString[2])
+
+      circleSel.classed("focusCircle",true)//.raise();
+      code = d3.select(".index" + site.index).attr("id")
+      $("#varselect").val(code);
+
+      numemploy = circleSel.attr("data-num");
+      // perfemale = circleSel.attr("data-fem");
+      // perbame = circleSel.attr("data-bame");
+      // per55 = circleSel.attr("data-fifty");
+      // earnings = circleSel.attr("data-earn");
+
+
+      if(parseInt(graphic.style("width"))  < threshold_sm){
+        tipmob(site);//tooltip stuff
+      } else {
+        //tip(site);
+        showTooltip(site, "." + splitString[2]);
+      }
+
+      var xpos = site[0];
+      var ypos = site[1];
+
+
+
+    } else {
+
+      selocc = d3.select("#c" + circlesel).attr("id");
+
+      d3.selectAll(".circles").classed("focusCircle",false);
+
+      circleSel = d3.selectAll("#" + selocc);
+      circleSel.classed("focusCircle",true)//.raise();
+
+      xpos = d3.selectAll("#" + selocc).attr("cx");
+      ypos = d3.selectAll("#" + selocc).attr("cy");
+
+
+      numemploy = circleSel.attr("data-num");
+      // perfemale = circleSel.attr("data-fem");
+      // perbame = circleSel.attr("data-bame");
+      // per55 = circleSel.attr("data-fifty");
+      // earnings = circleSel.attr("data-earn");
+
+      classString = d3.select("#" + selocc).attr("class");
+
+      splitString = classString.split(" ");
+
+      indexString = splitString[3].split("index");
+
+      myObj = {}
+
+      myObj[0] = xpos;
+      myObj[1] = ypos;
+
+      xVal = x.invert(xpos);
+      yVal =y.invert(ypos);
+      myObj['data'] = [xVal,yVal];
+      myObj['index'] = indexString[1];
+
+      $("#varselect").val(selocc);
+
+      if(parseInt(graphic.style("width"))  < threshold_sm){
+        tipmob(myObj);//tooltip stuff
+      } else {
+        showTooltip(myObj, "#" + selocc);
+        //tip(myObj);
+      }
+
+
+
+    }
+
+
+
+    // focus.select('#focusCircle')
+    //     .attr('cx', xpos)
+    //     .attr('cy', ypos);
+    // focus.select('#focusLineX')
+    //     .attr('x1', xpos).attr('y1', y(y.domain()[0]))
+    //     .attr('x2', xpos).attr('y2', ypos);
+    // focus.select('#focusLineY')
+    //     .attr('x1', x(x.domain()[0])).attr('y1', ypos)
+    //     .attr('x2', xpos).attr('y2', ypos);
+
+
+
+
+}
 
       //word wrapping function from https://stackoverflow.com/questions/24784302/wrapping-text-in-d3
       function wrap(text, width) {
@@ -789,19 +961,29 @@ function drawGraphic(){
 
       function selectCircle() {
 
+        $('.popover').each(function() { $(this).remove(); });
+
+
         selocc = d3.select("#varselect").node().value;
-        window.location.hash = selocc;
+        //window.location.hash = selocc;
 
 
         //layername = d3.select(this).node().value;
-        d3.select(".overlay1").style("pointer-events","none");
 
         d3.selectAll(".circles").classed("focusCircle",false).style("pointer-events","none");
-        d3.selectAll("#" + selocc).classed("focusCircle",true)//.raise();
+
+        circleSel = d3.selectAll("#" + selocc)
+
+        circleSel.classed("focusCircle",true)//.raise();
 
         xpos = d3.selectAll("#" + selocc).attr("cx");
         ypos = d3.selectAll("#" + selocc).attr("cy");
-        numemploy = d3.selectAll("#" + selocc).attr("data-num");
+
+        numemploy = circleSel.attr("data-num");
+        // perfemale = circleSel.attr("data-fem");
+        // perbame = circleSel.attr("data-bame");
+        // per55 = circleSel.attr("data-fifty");
+        // earnings = circleSel.attr("data-earn");
 
         classString = d3.select("#" + selocc).attr("class");
 
@@ -819,7 +1001,13 @@ function drawGraphic(){
         myObj['data'] = [xVal,yVal];
         myObj['index'] = indexString[1]
 
-        tip(myObj)
+        if(parseInt(graphic.style("width"))  < threshold_sm){
+          tipmob(myObj);//tooltip stuff
+        } else {
+          d3.select(".overlay1").style("pointer-events","none");
+          //tip(myObj);
+          showTooltip(myObj, "#" + selocc);
+        }
 
       } //end selectCircle
     }//end drawSelect
@@ -860,11 +1048,19 @@ function drawGraphic(){
             d3.select(".overlay1").style("pointer-events","none");
 
             d3.selectAll(".circles").classed("focusCircle",false).style("pointer-events","none");
-            d3.selectAll("#" + listnames[0]).classed("focusCircle",true)//.raise();
+
+            circleSel = d3.selectAll("#" + listnames[0])
+            circleSel.classed("focusCircle",true)//.raise();
 
             xpos = d3.selectAll("#" + listnames[0]).attr("cx");
             ypos = d3.selectAll("#" + listnames[0]).attr("cy");
-            numemploy = d3.selectAll("#" + listnames[0]).attr("data-num");
+
+
+            numemploy = circleSel.attr("data-num");
+            // perfemale = circleSel.attr("data-fem");
+            // perbame = circleSel.attr("data-bame");
+            // per55 = circleSel.attr("data-fifty");
+            // earnings = circleSel.attr("data-earn");
 
 
             classString = d3.select("#" + listnames[0]).attr("class");
@@ -883,7 +1079,12 @@ function drawGraphic(){
             myObj['data'] = [xVal,yVal];
             myObj['index'] = indexString[1]
 
-            tip(myObj)
+            if(parseInt(graphic.style("width"))  < threshold_sm){
+              tipmob(myObj);//tooltip stuff
+            } else {
+              //tip(myObj);
+              showTooltip(myObj, "#" + listnames[0]);
+            }
 
       } else {
 
@@ -893,6 +1094,16 @@ function drawGraphic(){
         //     .append("div")
         //     .attr("position","absolute")
         //
+
+        if(parseInt(graphic.style("width")) < threshold_sm) {
+          selectHeight = d3.select(".select").node().getBoundingClientRect().height;
+          infoHeight = d3.select(".infopanel").node().getBoundingClientRect().height;
+          topmarg = parseInt(selectHeight) + parseInt(infoHeight);
+        } else {
+          topmarg = 0;
+        }
+
+        console.log(listnameshow)
 
         listnames.forEach(function(d,i) {
           d3.selectAll("#" + listnames[i]).classed("highlightedCircle",true).raise();
@@ -918,12 +1129,6 @@ function drawGraphic(){
             //works out the label height so you know how much to offset the label
 
             labelheight = parseInt(currlabel.style("height"));
-
-            if(parseInt(graphic.style("width")) < threshold_sm) {
-              topmarg = 45;
-            } else {
-              topmarg = 0;
-            }
 
             currlabel.style("left",x(namex[0].proximity) + margin.left - 50 + "px")
                      .style("top",y(namex[0].exposure)  + topmarg + margin.top - 5 - labelheight - r(Math.sqrt(namex[0].in_employment/Math.PI) ) + "px")
